@@ -6,6 +6,8 @@ import static primitives.Util.*;
  * Test program for the 1st stage
  *
  * @author Dan Zilberstein
+ * @author Yosef Revivo 200532406 Yosef.revivo@outlook.com
+ * @author Dan Zilberstein
  */
 public final class Main {
 
@@ -19,7 +21,7 @@ public final class Main {
 		try { // test zero vector
 			new Vector(0, 0, 0);
 			out.println("ERROR: zero vector does not throw an exception");
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 
 		Vector v1 = new Vector(1, 2, 3);

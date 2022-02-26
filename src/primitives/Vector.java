@@ -1,5 +1,8 @@
 package primitives;
 
+/**
+ *
+ */
 public class Vector extends Point{
 
 
@@ -30,6 +33,7 @@ public class Vector extends Point{
     public String toString() {
         return "->" + super.toString();
     }
+
 
     public Vector add(Vector vector) {
         return new Vector(xyz.add(vector.xyz));
