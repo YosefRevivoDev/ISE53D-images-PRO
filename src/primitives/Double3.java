@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package primitives;
 
@@ -7,10 +7,10 @@ import static primitives.Util.*;
 
 /**
  * This class will serve all primitive classes based on three numbers
- * 
+ *
  * @author Dan Zilberstein
  */
-class Double3 {
+public class Double3 {
 	final double d1;
 	final double d2;
 	final double d3;
@@ -22,7 +22,7 @@ class Double3 {
 
 	/**
 	 * Constructor to initialize Double3 based object with its three number values
-	 * 
+	 *
 	 * @param d1 first number value
 	 * @param d2 second number value
 	 * @param d3 third number value
@@ -58,7 +58,7 @@ class Double3 {
 	/**
 	 * Sum two floating point triads into a new triad where each couple of numbers
 	 * is summarized
-	 * 
+	 *
 	 * @param rhs right handle side operand for addition
 	 * @return result of add
 	 */
@@ -69,7 +69,7 @@ class Double3 {
 	/**
 	 * Subtract two floating point triads into a new triad where each couple of
 	 * numbers is subtracted
-	 * 
+	 *
 	 * @param rhs right handle side operand for addition
 	 * @return result of add
 	 */
@@ -80,7 +80,7 @@ class Double3 {
 	/**
 	 * Scale (multiply) floating point triad by a number into a new triad where each
 	 * number is multiplied by the number
-	 * 
+	 *
 	 * @param rhs right handle side operand for scaling
 	 * @return result of scale
 	 */
@@ -91,7 +91,7 @@ class Double3 {
 	/**
 	 * Reduce (divide) floating point triad by a number into a new triad where each
 	 * number is divided by the number
-	 * 
+	 *
 	 * @param rhs right handle side operand for reducing
 	 * @return result of scale
 	 */
@@ -102,7 +102,7 @@ class Double3 {
 	/**
 	 * Product two floating point triads into a new triad where each couple of
 	 * numbers is multiplied
-	 * 
+	 *
 	 * @param rhs right handle side operand for product
 	 * @return result of product
 	 */
