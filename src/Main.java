@@ -7,7 +7,7 @@ import static primitives.Util.*;
  *
  * @author Dan Zilberstein
  * @author Yosef Revivo 200532406 Yosef.revivo@outlook.com
- * @author Chaim Gootwain 205459738 e77050@gmail.com
+ * @author Dan Zilberstein
  */
 public final class Main {
 
