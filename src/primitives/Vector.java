@@ -33,10 +33,9 @@ public class Vector extends Point{
             return true;
         if (obj == null)
             return false;
-        if (!(obj instanceof Point))
+        if (!(obj instanceof Vector))
             return false;
-        Point other = (Point) obj;
-        return super.equals(other);
+        return super.equals(obj);
     }
 
     @Override

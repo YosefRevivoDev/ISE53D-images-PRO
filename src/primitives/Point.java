@@ -6,7 +6,7 @@ package primitives;
  */
 public class Point {
 
-    protected final Double3 xyz;
+    Double3 xyz;
 
     /**
      * c'tor Gets a type of type Double3
@@ -24,10 +24,6 @@ public class Point {
      */
     public Point(double d1, double d2, double d3) {
         this(new Double3(d1, d2, d3));
-    }
-
-    public Double3 getXyz() {
-        return xyz;
     }
 
     /**
