@@ -4,14 +4,45 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import static primitives.Util.*;
+
 public class Tube implements Geometry {
 
     protected double radius;
     protected Ray axisRay;
 
+    public double getRadius() {
+        return radius;
+    }
+
+    public Ray getAxisRay() {
+        return axisRay;
+    }
+    // new
+
+    /**
+     *
+     * @param point
+     * @return
+     */
     @Override
     public Vector getNormal(Point point) {
-        return null;
+
+        Point P0 = axisRay.getP0();
+        Vector v = axisRay.getDir();
+
+        Vector P0_To_P = point.subtract(P0);
+        Double t = alignZero(P0_To_P.dotProduct(v));// alignZero means =  if the result is close to zero so result will be zero
+        // בדיקה אם הנקודה הנתונה והנקודת ההתחלה נמצאות באותו מקום - כלומר מאונכות אחת לשניה
+        if (isZero(t)){ // if we recive 0 so we return tje Normal
+             return P0_To_P.normalize();
+        }
+
+        Point O = P0.add(v.scale(t));// במידה ולא אז נוסיף לו את הוקטור V ונכפיל אותו בסקלר T פעמים
+
+        Vector O_To_P = point.subtract(O); // מחזיר את הוקטור בין הנקודה 0 לנקודה P
+
+        return O_To_P.normalize();
     }
 }
 

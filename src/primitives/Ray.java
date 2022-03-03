@@ -8,7 +8,7 @@ import java.util.Objects;
  */
 public class Ray {
 
-    private final Point P0;
+    private final Point _p0;
     private final Vector dir;
 
     /**
@@ -17,12 +17,12 @@ public class Ray {
      * @param dir
      */
     public Ray(Point p0, Vector dir) {
-        P0 = p0;
+        _p0 = p0;
         this.dir = dir;
     }
 
     public Point getP0() {
-        return P0;
+        return _p0;
     }
 
     public Vector getDir() {
@@ -35,13 +35,13 @@ public class Ray {
         if (o == null) return false;
         if (!(o instanceof Ray)) return false;
         Ray other = (Ray) o;
-        return this.P0.equals(other.P0) && this.dir.equals(other.dir);
+        return this._p0.equals(other._p0) && this.dir.equals(other.dir);
     }
 
     @Override
     public String toString() {
         return "Ray{" +
-                "P0=" + P0 +
+                "P0=" + _p0 +
                 ", dir=" + dir +
                 '}';
     }
