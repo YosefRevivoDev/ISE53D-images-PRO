@@ -3,27 +3,27 @@ package primitives;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * Unit tests for primitives.Point class
  */
 class PointTest {
 
+    Point po = new Point(0,3,3);
     /**
      * Test method for { primitives.Point# add (primitives.Point)}.
      */
 
     @Test
-    void add() {
-        Point PT = new Point( 3,5,7);
+    void TestAdd() {
+
         // ============ Equivalence Partitions Tests ==============1,5,12
-        Point PT2 = new Point(2,0,-5 );
+        assertEquals(new Point(0,3,1), po.add(new Vector(0,1,0)), "Not could add a point");
     }
 
     @Test
     void subtract() {
-
-        //if (!new Vector(1, 1, 1).equals(new Point(2, 3, 4).subtract(p1)))
-        //            out.println("ERROR: Point - Point does not work correctly");
-
+      assertEquals(new Point(0,3,6), po.subtract(new Point(0,9,9)), "Error sub: Not could sub the point" );
     }
 }
