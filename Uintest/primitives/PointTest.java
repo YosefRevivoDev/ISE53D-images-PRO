@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for primitives.Point class
+ * @author Yosef Revivo + Chaim Gootwain
  */
 class PointTest {
 

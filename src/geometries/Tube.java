@@ -11,6 +11,16 @@ public class Tube implements Geometry {
     protected double radius;
     protected Ray axisRay;
 
+    /**
+     * Tube Constructor receiving radius and axis Ray
+     *
+     * @param radius radius
+     * @param axisRay axisRay
+     */
+    public Tube(double radius, Ray axisRay) {
+        this.axisRay = axisRay;
+    }
+
     public double getRadius() {
         return radius;
     }
@@ -18,8 +28,8 @@ public class Tube implements Geometry {
     public Ray getAxisRay() {
         return axisRay;
     }
-    // new
 
+    // new
     /**
      *
      * @param point
