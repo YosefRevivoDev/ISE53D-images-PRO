@@ -14,6 +14,8 @@ public class Sphere implements Geometry{
      * @param center center
      */
     public Sphere(double radius, Point center) {
+        this.radius = radius;
+        this.center = center;
     }
 
     @Override
