@@ -31,6 +31,8 @@ class PlaneTest {
                         new Point(-4, 2, 2),
                         new Point(-2, 1, 5)).getNormal(null),"Wrong plane normal");
     }
+
+
 }
 
 

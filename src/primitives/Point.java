@@ -23,6 +23,7 @@ public class Point {
      * @param d3
      */
     public Point(double d1, double d2, double d3) {
+
         this(new Double3(d1, d2, d3));
     }
 
@@ -60,6 +61,7 @@ public class Point {
      * @return
      */
     public Vector subtract(Point p1) {
+
         return new Vector(xyz.subtract(p1.xyz));
     }
 }

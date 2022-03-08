@@ -29,7 +29,6 @@ public class Tube implements Geometry {
         return axisRay;
     }
 
-    // new
     /**
      *
      * @param point
@@ -42,6 +41,7 @@ public class Tube implements Geometry {
         Vector v = axisRay.getDir();
 
         Vector P0_To_P = point.subtract(P0);
+
         Double t = alignZero(P0_To_P.dotProduct(v));// alignZero means =  if the result is close to zero so result will be zero
         // בדיקה אם הנקודה הנתונה והנקודת ההתחלה נמצאות באותו מקום - כלומר מאונכות אחת לשניה
         if (isZero(t)){ // if we recive 0 so we return tje Normal

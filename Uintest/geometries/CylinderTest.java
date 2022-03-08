@@ -13,6 +13,10 @@ import primitives.Vector;
 
 class CylinderTest {
 
+    /**
+     * Test method for
+     * {@link Cylinder#getNormal(Point)}
+     */
     @Test
     void getNormal() {
 
@@ -42,7 +46,4 @@ class CylinderTest {
 }
 
 
-/**
-     * Test method for
-     * {@link Cylinder#getNormal(Point3D)}
-     */
+

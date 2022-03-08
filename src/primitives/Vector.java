@@ -3,38 +3,38 @@ package primitives;
 /**
  * This class defines for us a vector consisting of a direction and a point
  */
-public class Vector extends Point{
+public class Vector extends Point {
 
     /**
      * c'tor Gets three values from type double
+     *
      * @param d1
      * @param d2
      * @param d3
      */
     public Vector(double d1, double d2, double d3) {
+
         this(new Double3(d1, d2, d3));
     }
 
     /**
      * c'tor Gets a type of type Double3
      * With catch that check if this vector is zero
+     *
      * @param xyz
      */
-    public Vector(Double3 xyz){
+    public Vector(Double3 xyz) {
         super(xyz);
-        if (xyz.equals(Double3.ZERO)){
+        if (xyz.equals(Double3.ZERO)) {
             throw new IllegalArgumentException("Vector can not be the vector zero");
         }
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof Vector))
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof Vector)) return false;
         return super.equals(obj);
     }
 
@@ -45,6 +45,7 @@ public class Vector extends Point{
 
     /**
      * Vector insert function
+     *
      * @param vector
      * @return
      */
@@ -54,15 +55,17 @@ public class Vector extends Point{
 
     /**
      * Multiplies vector and scalar and returns a new vector
+     *
      * @param number
      * @return
      */
-    public Vector scale(double number){
+    public Vector scale(double number) {
         return new Vector(xyz.scale(number));
     }
 
     /**
      * Calculate vector length squared
+     *
      * @return
      */
     public double lengthSquared() {
@@ -71,6 +74,7 @@ public class Vector extends Point{
 
     /**
      * Calculate vector length
+     *
      * @return
      */
     public double length() {
@@ -79,6 +83,7 @@ public class Vector extends Point{
 
     /**
      * Multiply vector by scalar according to the rules in the exercise
+     *
      * @param v3
      * @return
      */
@@ -90,6 +95,7 @@ public class Vector extends Point{
     /**
      * Multiplies a vector in vector and returns a new vector
      * that is perpendicular to the two existing vectors
+     *
      * @param vector
      * @return
      */
@@ -103,6 +109,7 @@ public class Vector extends Point{
     /**
      * Normalizes the vector and returns a new normalized vector
      * in the same direction as the original vector
+     *
      * @return
      */
     public Vector normalize() {
