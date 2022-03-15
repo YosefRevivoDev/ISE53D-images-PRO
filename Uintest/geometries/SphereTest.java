@@ -9,6 +9,12 @@ import geometries.Triangle;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
+
+/**
+ * Testing Sphere
+ *  @author Yossef Revivo and Chaim Gootwain
+ */
+
 class SphereTest {
 
     /**

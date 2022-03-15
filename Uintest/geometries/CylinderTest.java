@@ -10,6 +10,10 @@ import geometries.Tube;
 import primitives.Ray;
 import primitives.Vector;
 
+/**
+ * Testing Cylinder
+ *  @author Yossef Revivo and Chaim Gootwain
+ */
 
 class CylinderTest {
 

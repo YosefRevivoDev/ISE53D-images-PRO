@@ -9,8 +9,17 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+/**
+ * Testing Tube
+ *  @author Yossef Revivo and Chaim Gootwain
+ */
+
 class TubeTest {
 
+    /**
+     * Test method for
+     * {@link Tube#getNormal(Point)}
+     */
     @Test
     void getNormal() {
 

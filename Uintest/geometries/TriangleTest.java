@@ -11,8 +11,17 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+/**
+ * Testing Triangle
+ *  @author Yossef Revivo and Chaim Gootwain
+ */
+
 public class TriangleTest {
 
+    /**
+     * Test method for
+     * {@link Triangle#getNormal(Point)}
+     */
     @Test
     void getNormal() {
 // ============ Equivalence Partitions Tests ==============

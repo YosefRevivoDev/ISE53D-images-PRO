@@ -9,12 +9,12 @@ import primitives.Point;
 import primitives.Vector;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testing Planes
+ *  @author Yossef Revivo and Chaim Gootwain
+ */
 
 class PlaneTest {
-
-    @Test
-    void getP0() {
-    }
 
     /**
      * Test method for

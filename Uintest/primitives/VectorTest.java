@@ -8,6 +8,7 @@ import static primitives.Util.isZero;
 
 /**
  * Unit tests for primitives.Vector class
+ *  @author Yossef Revivo and Chaim Gootwain
  */
 
 class VectorTest {
@@ -29,7 +30,9 @@ class VectorTest {
 
     @Test
     void testScale() {
-
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Simple test
+        assertEquals(new Vector(1,1,1).scale(2), new Vector(2,2,2),"Wrong vector scale");
     }
 
     @Test

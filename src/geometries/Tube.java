@@ -30,7 +30,7 @@ public class Tube implements Geometry {
     }
 
     /**
-     *
+     * func that calculate the length between
      * @param point
      * @return
      */
