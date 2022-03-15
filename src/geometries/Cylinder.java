@@ -5,7 +5,6 @@ import primitives.Ray;
 import primitives.Vector;
 import static primitives.Util.*;
 
-
 public class Cylinder extends Tube{
 
     private double height;

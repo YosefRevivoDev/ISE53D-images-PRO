@@ -13,7 +13,7 @@ public class Point {
      * @param xyz
      */
     public Point(Double3 xyz) {
-        this.xyz = xyz;
+         this.xyz = xyz;
     }
 
     /**
