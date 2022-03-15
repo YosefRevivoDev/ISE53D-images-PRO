@@ -84,14 +84,14 @@ class VectorTest {
     void testNormalize() {
         // test vector normalization vs vector length and cross-product
         Vector v = new Vector(1, 2, 3);
-        Vector vCopy = new Vector(1,2,3);
         Vector u = v.normalize();
 
+        // ============ Equivalence Partitions Tests ==============
+
+        // TC01: Test that normalized vector is not a unit vector
         assertTrue(isZero(u.length() - 1), "ERROR: the normalized vector is not a unit vector");
 
-        // =============== Boundary Values Tests ==================
-
-        //TC03: normalized() does not create a new vector
+        //TC02: normalized() does not create a new vector
         if (u == v)
             fail("ERROR: normalized() function does not create a new vector");
     }
