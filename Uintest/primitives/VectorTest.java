@@ -17,15 +17,11 @@ class VectorTest {
     Vector v2 = new Vector(-2, -4, -6);
     Vector v3 = new Vector(0, 3, -2);
 
-    Point p1 = new Point(1, 2, 3);
-
-
-
     @Test
     void testAdd (){
         // =============== Boundary Values Tests ==================
         //TC11: test if operator add succeed
-        assertEquals(!(p1.add(new Vector(-1, -2, -3)).equals(new Point(0, 0, 0))),"ERROR: Point + Vector does not work correctly");
+        assertEquals(new Vector(1, 0, 0), v1.add(new Vector(0, -2, -3)),"ERROR: Point + Vector does not work correctly");
     }
 
     @Test
@@ -40,7 +36,7 @@ class VectorTest {
 
         // =============== Boundary Values Tests ==================
         //TC11: test lengthSquared..
-        assertEquals(isZero(v1.lengthSquared() - 14), "ERROR: lengthSquared() wrong value");
+        assertTrue(isZero(v1.lengthSquared() - 14), "ERROR: lengthSquared() wrong value");
     }
 
     @Test
@@ -48,7 +44,7 @@ class VectorTest {
 
         // =============== Boundary Values Tests ==================
         //TC11: test length..
-        assertEquals(isZero(new Vector(0, 3, 4).length() - 5), "ERROR: length() wrong value");
+        assertTrue(isZero(new Vector(0, 3, 4).length() - 5), "ERROR: length() wrong value");
     }
 
     @Test
@@ -56,10 +52,10 @@ class VectorTest {
 
         // =============== Boundary Values Tests ==================
         // TC11: test if orthogonal vectors is not zero
-        assertEquals(isZero(v1.dotProduct(v3)), "ERROR: dotProduct() for orthogonal vectors is not zero");
+        assertTrue(isZero(v1.dotProduct(v3)), "ERROR: dotProduct() for orthogonal vectors is not zero");
 
         //TC12: test if wrong value
-        assertEquals(isZero(v1.dotProduct(v2) + 28), "ERROR: dotProduct() wrong value");
+        assertEquals(v1.dotProduct(v2) ,-28,0.00001, "ERROR: dotProduct() wrong value");
     }
 
     @Test
@@ -88,13 +84,15 @@ class VectorTest {
     void testNormalize() {
         // test vector normalization vs vector length and cross-product
         Vector v = new Vector(1, 2, 3);
+        Vector vCopy = new Vector(1,2,3);
         Vector u = v.normalize();
 
-        assertEquals(u.length() - 1, "ERROR: the normalized vector is not a unit vector");
+        assertTrue(isZero(u.length() - 1), "ERROR: the normalized vector is not a unit vector");
 
         // =============== Boundary Values Tests ==================
-        //TC11: test that the vectors are co-lined
-        assertEquals(v.crossProduct(u), "ERROR: the normalized vector is not parallel to the original one");
-        assertEquals(v.dotProduct(u) < 0, "ERROR: the normalized vector is opposite to the original one");
+
+        //TC03: normalized() does not create a new vector
+        if (u == v)
+            fail("ERROR: normalized() function does not create a new vector");
     }
 }

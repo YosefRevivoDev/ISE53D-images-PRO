@@ -25,6 +25,6 @@ class PointTest {
 
     @Test
     void subtract() {
-      assertEquals(new Point(0,0,0), po.subtract(new Point(-1,-2,-3)), "Error sub: Not could sub the point" );
+      assertEquals(new Point(2,4,6), po.subtract(new Point(-1,-2,-3)), "Error sub: Not could sub the point" );
     }
 }
