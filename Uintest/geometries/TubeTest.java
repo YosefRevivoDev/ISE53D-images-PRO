@@ -25,6 +25,7 @@ class TubeTest {
 
         Vector v = new Vector(0,0,1);
         Ray r =  new Ray(new Point(0,0,0), v);
+
         // ============ Equivalence Partitions Tests ==============
         // TC01: simple test
         assertEquals(new Vector(0,1,0),new Tube(1.0, r).getNormal(new Point(0,1,1)),"Wrong Tube getNormal()");

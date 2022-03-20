@@ -25,14 +25,12 @@ class PlaneTest {
 
         // ============ Equivalence Partitions Tests ==============
         // TC01: simple test
-        assertEquals(new Vector(3, 9, 1).normalize(),
+        assertEquals(new Vector(3, 9, 1),
                 new Plane(
                         new Point(-1, 1, 2),
                         new Point(-4, 2, 2),
                         new Point(-2, 1, 5)).getNormal(null),"Wrong plane normal");
     }
-
-
 }
 
 
