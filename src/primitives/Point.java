@@ -24,8 +24,9 @@ public class Point {
      */
     public Point(double d1, double d2, double d3) {
 
-        this(new Double3(d1, d2, d3));
+        this.xyz = new Double3(d1, d2, d3);
     }
+
 
     /**
      * Boolean comparison function between objects

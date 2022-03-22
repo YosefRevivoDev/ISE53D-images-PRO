@@ -4,6 +4,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 import static primitives.Util.*;
 
 public class Tube implements Geometry {
@@ -27,6 +29,10 @@ public class Tube implements Geometry {
 
     public Ray getAxisRay() {
         return axisRay;
+    }
+
+    public List<GeoPoint> findIntsersections(Ray ray) {
+        return null;
     }
 
     /**

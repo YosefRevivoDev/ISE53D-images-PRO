@@ -2,6 +2,8 @@ package geometries;
 
 import primitives.*;
 
+import java.util.List;
+
 
 public class Sphere implements Geometry{
 
@@ -16,6 +18,10 @@ public class Sphere implements Geometry{
     public Sphere(double radius, Point center) {
         this.radius = radius;
         this.center = center;
+    }
+
+    public List<GeoPoint> findIntsersections(Ray ray) {
+        return null;
     }
 
     @Override

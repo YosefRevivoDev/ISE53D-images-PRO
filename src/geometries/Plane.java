@@ -1,8 +1,12 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
-
+import static primitives.Util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Plane implements Geometry {
     private final Point p0;
@@ -37,10 +41,16 @@ public class Plane implements Geometry {
         }
     }
 
+    @Override
+    public List<GeoPoint> findIntsersections(Ray ray) {
+            return null;
+    }
+
     public Point getP0() {
         return p0;
     }
 
+    @Override
     public Vector getNormal(Point point) {
         return normal;
     }
