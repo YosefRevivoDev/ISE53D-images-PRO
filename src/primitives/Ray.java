@@ -2,14 +2,16 @@ package primitives;
 
 import java.util.Objects;
 
+import static primitives.Util.isZero;
+
 /**
  * This class defines us the RAY by a group of
  * points that are on the far side of the point and are called "RAY head"
  */
 public class Ray {
 
-    private final Point _p0;
-    private final Vector dir;
+    private Point _p0;
+    private Vector dir;
 
     /**
      * Constructor of point vector normalized direction
@@ -20,13 +22,20 @@ public class Ray {
         _p0 = p0;
         this.dir = dir;
     }
+    public Point getPoint() { return (_p0);}
 
     public Point getP0() {
         return _p0;
     }
 
-    public Vector getDir() {
-        return dir;
+    public Vector getDir() { return (dir);}
+
+    /**
+     * @param length
+     * @return new Point
+     */
+    public Point getTargetPoint(double length) {
+        return isZero(length ) ? _p0 : _p0.add(dir.scale(length));
     }
 
     @Override

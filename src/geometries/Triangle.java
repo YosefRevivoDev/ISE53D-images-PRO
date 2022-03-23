@@ -1,9 +1,12 @@
 package geometries;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import primitives.Point;
 import primitives.Ray;
+import primitives.Util;
+import primitives.Vector;
 
 
 public class Triangle extends Polygon {
@@ -18,7 +21,36 @@ public class Triangle extends Polygon {
         super(p1, p2, p3);
     }
 
-    public List<GeoPoint> findIntsersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
+        if (plane.findIntsersections(ray) == null) return null;
+        List<GeoPoint> planeIntersections = plane.findIntsersections(ray);
+
+
+        //Point p0 = ray.getPoint();
+        Vector v = ray.getDir();
+
+        Vector v1 = vertices.get(0).subtract(ray.getPoint());
+        Vector v2 = vertices.get(1).subtract(ray.getPoint());
+        Vector v3 = vertices.get(2).subtract(ray.getPoint());
+
+
+        double d1 = v.dotProduct(v1.crossProduct(v2));
+        if (Util.isZero(d1)) return null;
+        double d2 = v.dotProduct(v2.crossProduct(v3));
+        if (Util.isZero(d2)) return null;
+        double d3 = v.dotProduct(v3.crossProduct(v1));
+        if (Util.isZero(d3)) return null;
+
+        // if the intersection is inside triangle
+        if ((d1 > 0.0 && d2 > 0.0 && d3 > 0.0) || (d1 < 0.0 && d2 < 0.0 && d3 < 0.0)) {
+            List<GeoPoint> result = new LinkedList<>();
+            for (GeoPoint geo : planeIntersections) {
+                result.add(new GeoPoint(this, geo.getPoint()));
+            }
+            result.get(0)._geometry = this;
+            return result;
+        }
+
         return null;
     }
 }

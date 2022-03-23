@@ -7,6 +7,7 @@ import static primitives.Util.*;
  * @author Dan Zilberstein
  */
 public class Double3 {
+
 	final double d1;
 	final double d2;
 	final double d3;

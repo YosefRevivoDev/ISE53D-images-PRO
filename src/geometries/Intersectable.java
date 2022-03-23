@@ -35,9 +35,7 @@ public interface Intersectable {
         public Point getPoint(){
             return _point;
         }
+
     }
-
-
-
 
 }

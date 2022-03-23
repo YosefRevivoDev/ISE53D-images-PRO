@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Plane implements Geometry {
+public class Plane extends Geometry {
+
     private final Point p0;
     private final Vector normal;
 
@@ -42,8 +43,28 @@ public class Plane implements Geometry {
     }
 
     @Override
-    public List<GeoPoint> findIntsersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
+
+        Vector p0Q;
+
+        try {
+            p0Q = p0.subtract(ray.getPoint());
+        } catch (IllegalArgumentException e) {
+            return null; // ray starts from point Q - no intersections
+        }
+
+
+        double nv = normal.dotProduct(ray.getDir());
+        if (isZero(nv)) //if the ray is parallel to the plane - no intersection
             return null;
+
+        double t = alignZero(normal.dotProduct(p0Q) / nv);
+
+        if (t > 0) {
+            return List.of(new GeoPoint(this, ray.getTargetPoint(t)));
+        } else {
+            return null;
+        }
     }
 
     public Point getP0() {

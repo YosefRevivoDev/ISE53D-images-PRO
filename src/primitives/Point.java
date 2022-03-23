@@ -1,4 +1,6 @@
 package primitives;
+import java.util.Objects;
+
 
 /**
  * Produces a point in the plane that is represented by 3 values and in addition
@@ -27,6 +29,9 @@ public class Point {
         this.xyz = new Double3(d1, d2, d3);
     }
 
+    public double getX (){
+        return xyz.d1;
+    }
 
     /**
      * Boolean comparison function between objects
