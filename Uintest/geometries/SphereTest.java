@@ -18,7 +18,6 @@ import java.util.List;
 
 class SphereTest {
 
-
     /**
      * Test method for
      * {@link geometries.Sphere#findIntsersections(Ray)}.
@@ -41,12 +40,12 @@ class SphereTest {
         assertNull(sphere.findIntsersections(new Ray(new Point(-1, 0, 0), new Vector(1, 1, 0))),"Ray's line out of sphere");
 
         // TC02: Ray starts before and crosses the sphere (2 points)
-        List<Intersectable.GeoPoint> result02 = sphere.findIntsersections(new Ray((new Point(-1, 0, 0)),
+        List<Intersectable.Point> result02 = sphere.findIntsersections(new Ray((new Point(-1, 0, 0)),
                 new Vector(3, 1, 0)));
         assertEquals(2, result02.size(),"Wrong number of points");
 
         points.clear();
-        for (Intersectable.GeoPoint geo : result02) {
+        for (Intersectable.Point geo : result02) {
             points.add(geo._point);
         }
         if (points.get(0).getX() > points.get(1).getX()) {
@@ -55,10 +54,10 @@ class SphereTest {
         assertEquals(exp, points, "Ray crosses sphere");
 
         // TC03: Ray starts inside the sphere (1 point)
-        List<Intersectable.GeoPoint> result03 = sphere.findIntsersections(new Ray(new Point(0.5, 0.5, 0),
+        List<Intersectable.Point> result03 = sphere.findIntsersections(new Ray(new Point(0.5, 0.5, 0),
                 new Vector(3, 1, 0)));
         points.clear();
-        for (Intersectable.GeoPoint geo : result03) {
+        for (Intersectable.Point geo : result03) {
             points.add(geo._point);
         }
 
@@ -72,9 +71,9 @@ class SphereTest {
 
         // **** Group: Ray's line crosses the sphere (but not the center)
         // TC11: Ray starts at sphere and goes inside (1 points)
-        List<Intersectable.GeoPoint> result11 = sphere.findIntsersections(new Ray(new Point(1, -1, 0), new Vector(1, 1, 0)));
+        List<Intersectable.Point> result11 = sphere.findIntsersections(new Ray(new Point(1, -1, 0), new Vector(1, 1, 0)));
         points.clear();
-        for (Intersectable.GeoPoint geo : result11) {
+        for (Intersectable.Point geo : result11) {
             points.add(geo._point);
         }
         assertEquals(List.of(new Point(2, 0, 0)), points,"Ray from sphere inside");
@@ -85,41 +84,41 @@ class SphereTest {
 
         // **** Group: Ray's line goes through the center
         // TC13: Ray starts before the sphere (2 points)
-        List<Intersectable.GeoPoint> result13 = sphere.findIntsersections(new Ray(new Point(1, -2, 0),
+        List<Intersectable.Point> result13 = sphere.findIntsersections(new Ray(new Point(1, -2, 0),
                 new Vector(0, 1, 0)));
         assertEquals(2, result13.size(),"Wrong number of points");
 
         points.clear();
-        for (Intersectable.GeoPoint geo : result13) {
+        for (Intersectable.Point geo : result13) {
             points.add(geo._point);
         }
 
         assertEquals(List.of(new Point(1, -1, 0), new Point(1, 1, 0)), points,"Line through O, ray crosses sphere");
 
         // TC14: Ray starts at sphere and goes inside (1 points)
-        List<Intersectable.GeoPoint> result14 = sphere.findIntsersections(new Ray(new Point(1, -1, 0),
+        List<Intersectable.Point> result14 = sphere.findIntsersections(new Ray(new Point(1, -1, 0),
                 new Vector(0, 1, 0)));
         points.clear();
-        for (Intersectable.GeoPoint geo : result14) {
+        for (Intersectable.Point geo : result14) {
             points.add(geo._point);
         }
 
         assertEquals(listOfPoints, points, "Line through O, ray from and crosses sphere");
 
         // TC15: Ray starts inside (1 points)
-        List<Intersectable.GeoPoint> result15 = sphere.findIntsersections(new Ray(new Point(1, 0.5, 0),
+        List<Intersectable.Point> result15 = sphere.findIntsersections(new Ray(new Point(1, 0.5, 0),
                 new Vector(0, 1, 0)));
         points.clear();
-        for (Intersectable.GeoPoint geo : result15) {
+        for (Intersectable.Point geo : result15) {
             points.add(geo._point);
         }
         assertEquals(listOfPoints, points, "Line through O, ray from inside sphere");
 
         // TC16: Ray starts at the center (1 points)
-        List<Intersectable.GeoPoint> result16 = sphere.findIntsersections(new Ray(new Point(1, 0, 0),
+        List<Intersectable.Point> result16 = sphere.findIntsersections(new Ray(new Point(1, 0, 0),
                 new Vector(0, 1, 0)));
         points.clear();
-        for (Intersectable.GeoPoint geo : result16) {
+        for (Intersectable.Point geo : result16) {
             points.add(geo._point);
         }
         assertEquals(listOfPoints, points, "Line through O, ray from O");

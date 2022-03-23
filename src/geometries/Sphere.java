@@ -25,7 +25,7 @@ public class Sphere implements Geometry{
     }
 
     @Override
-    public List<GeoPoint> findIntsersections(Ray ray) {
+    public List<Point> findIntsersections(Ray ray) {
         Point p0 = ray.getPoint();
         Vector v = ray.getDir();
         Vector u;
@@ -33,7 +33,7 @@ public class Sphere implements Geometry{
         try {
             u = center.subtract(p0);   // p0 == center
         } catch (IllegalArgumentException e) {
-            return List.of(new GeoPoint(this,ray.getTargetPoint(radius)));
+            return List.of(new Point(this,ray.getTargetPoint(radius)));
         }
 
         double tm = alignZero(v.dotProduct(u));
@@ -50,13 +50,13 @@ public class Sphere implements Geometry{
 
         if (t1 <= 0 && t2 <= 0) return null;
         if (t1 > 0 && t2 > 0) {
-            return List.of(new GeoPoint(this, (ray.getTargetPoint(t1)))
-                    ,new GeoPoint(this, (ray.getTargetPoint(t2))));//P1 , P2
+            return List.of(new Point(this, (ray.getTargetPoint(t1)))
+                    ,new Point(this, (ray.getTargetPoint(t2))));//P1 , P2
         }
         if (t1 > 0)
-            return List.of(new GeoPoint(this,(ray.getTargetPoint(t1))));
+            return List.of(new Point(this,(ray.getTargetPoint(t1))));
         else if (t2 > 0)
-            return List.of(new GeoPoint(this,(ray.getTargetPoint(t2))));
+            return List.of(new Point(this,(ray.getTargetPoint(t2))));
         return null;
     }
 

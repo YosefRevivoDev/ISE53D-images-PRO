@@ -84,7 +84,7 @@ public class Polygon implements Geometry {
 		size = vertices.length;
 	}
 
-	public List<GeoPoint> findIntsersections(Ray ray) {
+	public List<Point> findIntsersections(Ray ray) {
 		return null;
 	}
 

@@ -31,7 +31,7 @@ public class Tube implements Geometry {
         return axisRay;
     }
 
-    public List<GeoPoint> findIntsersections(Ray ray) {
+    public List<Point> findIntsersections(Ray ray) {
         return null;
     }
 

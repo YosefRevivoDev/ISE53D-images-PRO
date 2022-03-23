@@ -14,7 +14,6 @@ import geometries.Intersectable;
 
 import java.util.List;
 
-import static geometries.Intersectable.GeoPoint;
 
 /**
  * Testing Triangle
@@ -37,7 +36,7 @@ public class TriangleTest {
         // ============ Equivalence Partitions Tests ==============
 
         // TC01: Ray's line is inside triangle (1 point)
-        assertEquals(List.of(new GeoPoint(triangle,new Point(0.48, 0.52, 0.23))),
+        assertEquals(List.of(new Point(triangle,new Point(0.48, 0.52, 0.23))),
                 triangle.findIntsersections(new Ray(new Point(-1.6, 0, 0), new Vector(2.08, 0.52,0.23))),"line is inside triangle" );
 
         // TC02: Ray's line is outside against edge (0 points)

@@ -1,4 +1,6 @@
 package primitives;
+import geometries.Geometry;
+
 import java.util.Objects;
 
 
@@ -9,7 +11,8 @@ import java.util.Objects;
 public class Point {
 
     Double3 xyz;
-
+    public Geometry _geometry;
+    public Point _point;
     /**
      * c'tor Gets a type of type Double3
      * @param xyz
@@ -69,5 +72,21 @@ public class Point {
     public Vector subtract(Point p1) {
 
         return new Vector(this.xyz.subtract(p1.xyz));
+    }
+
+    /**
+     * @param _geometry
+     * @param _point
+     */
+    public Point(Geometry _geometry, Point _point) {
+        this._geometry = _geometry;
+        this._point = _point;
+    }
+
+    /**
+     * @return _point
+     */
+    public Point getPoint(){
+        return _point;
     }
 }

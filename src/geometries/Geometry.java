@@ -9,5 +9,4 @@ import java.util.List;
 public interface Geometry extends Intersectable {
 
     public Vector getNormal(Point point);
-    public List<GeoPoint> findIntsersections(Ray ray);
 }
