@@ -12,7 +12,7 @@ public interface Intersectable {
      * @param ray Ray
      * @return list of intersections
      */
-    public List<GeoPoint> findIntsersections(Ray ray);
+    public List<Point> findIntsersections(Ray ray);
 
     /**
      * GeoPoint is just a tuple holding

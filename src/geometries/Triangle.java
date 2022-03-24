@@ -21,9 +21,9 @@ public class Triangle extends Polygon {
         super(p1, p2, p3);
     }
 
-    public List<GeoPoint> findIntsersections(Ray ray) {
+    public List<Point> findIntsersections(Ray ray) {
         if (plane.findIntsersections(ray) == null) return null;
-        List<GeoPoint> planeIntersections = plane.findIntsersections(ray);
+        List<Point> planeIntersections = plane.findIntsersections(ray);
 
 
         //Point p0 = ray.getPoint();
@@ -43,9 +43,9 @@ public class Triangle extends Polygon {
 
         // if the intersection is inside triangle
         if ((d1 > 0.0 && d2 > 0.0 && d3 > 0.0) || (d1 < 0.0 && d2 < 0.0 && d3 < 0.0)) {
-            List<GeoPoint> result = new LinkedList<>();
-            for (GeoPoint geo : planeIntersections) {
-                result.add(new GeoPoint(this, geo.getPoint()));
+            List<Point> result = new LinkedList<>();
+            for (Point geo : planeIntersections) {
+                result.add(new Point(this, geo.getPoint()));
             }
             result.get(0)._geometry = this;
             return result;
