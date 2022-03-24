@@ -1,8 +1,6 @@
 package geometries;
 
-import primitives.Point;
-import primitives.Ray;
-import primitives.Vector;
+import primitives.*;
 import static primitives.Util.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -10,12 +8,18 @@ import java.util.List;
 
 public class Plane implements Geometry {
 
-    private final Point p0;
-    private final Vector normal;
+    Point p0;
+    primitives.Vector normal;
 
+    /**
+     * Plane Constructor receiving a point and normal vector
+     *
+     * @param p0      point
+     * @param normal vector
+     */
     public Plane(Point p0, Vector normal) {
         this.p0 = p0;
-        this.normal = normal.normalize();
+        this.normal = normal;
     }
 
     /**
@@ -42,7 +46,7 @@ public class Plane implements Geometry {
         }
     }
 
-    public List<Point> findIntsersections(Ray ray) {
+    public List<GeoPoint> findIntsersections(Ray ray) {
 
         Vector p0Q;
 
@@ -60,7 +64,7 @@ public class Plane implements Geometry {
         double t = alignZero(normal.dotProduct(p0Q) / nv);
 
         if (t > 0) {
-            return List.of(new Point(this, ray.getTargetPoint(t)));
+            return List.of(new GeoPoint(this, ray.getTargetPoint(t)));
         } else {
             return null;
         }
@@ -77,4 +81,13 @@ public class Plane implements Geometry {
     }
 
     public Vector getNormal(){return this.normal;}
+
+    @Override
+    public String toString() {
+        return "Plane{" +
+                "p0 =" + p0.toString() +
+                ", normal=" + normal.toString() +
+                '}';
+    }
+
 }

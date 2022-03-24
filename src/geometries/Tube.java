@@ -26,12 +26,11 @@ public class Tube implements Geometry {
     public double getRadius() {
         return radius;
     }
-
     public Ray getAxisRay() {
         return axisRay;
     }
 
-    public List<Point> findIntsersections(Ray ray) {
+    public List<GeoPoint> findIntsersections(Ray ray) {
         return null;
     }
 

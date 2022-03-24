@@ -9,10 +9,24 @@ public class Cylinder extends Tube{
 
     private double height;
 
+
+    /**
+     * Cylinder Constructor receiving radius, axis and height
+     * @param radius
+     * @param axisRay
+     * @param height
+     */
     public Cylinder(double radius, Ray axisRay, double height) {
 
         super(radius,axisRay);
         this.height = height;
+    }
+
+    /**
+     * @return
+     */
+    public double getHeight(){
+        return height;
     }
 
     @Override
@@ -35,5 +49,14 @@ public class Cylinder extends Tube{
 
         p0 = p0.add(v.scale(tScale));
         return point.subtract(p0).normalize();
+    }
+
+    @Override
+    public String toString() {
+        return "Cylinder{" +
+                "height=" + height +
+                ", axisRay=" + axisRay.toString() +
+                ", radius=" + radius +
+                '}';
     }
 }

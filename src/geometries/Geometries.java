@@ -33,7 +33,7 @@ public class Geometries implements Intersectable {
     /**
      * Adds a new shape to the list
      * @param geometries
-     *               - The shape to add (One of the realists of Geometry)
+     * - The shape to add (One of the realists of Geometry)
      */
     public void add(Intersectable... geometries) {
         _geometries.addAll(Arrays.asList(geometries));
@@ -44,13 +44,13 @@ public class Geometries implements Intersectable {
      * @return list of Point that intersect the Collection
      */
     @Override
-    public List<Point> findIntsersections(Ray ray) {
+    public List<GeoPoint> findIntsersections(Ray ray) {
 
         if (_geometries.isEmpty()) return null;
-        List<Point> intersections = null;
+        List<GeoPoint> intersections = null;
 
         for (Intersectable geo : _geometries) {
-            List<Point> tempIntersections = geo.findIntsersections(ray);
+            List<GeoPoint> tempIntersections = geo.findIntsersections(ray);
             if (tempIntersections != null) {
                 if (intersections == null)
                     intersections = new LinkedList<>();

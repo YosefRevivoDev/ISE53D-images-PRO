@@ -84,8 +84,35 @@ public class Polygon implements Geometry {
 		size = vertices.length;
 	}
 
-	public List<Point> findIntsersections(Ray ray) {
-		return null;
+	@Override
+	public List<GeoPoint> findIntsersections(Ray ray) {
+		List<GeoPoint> intersection = plane.findIntsersections(ray);
+		if (intersection == null) return null;
+
+		Point p0 = ray.getPoint();
+		Vector v = ray.getDir();
+
+      /*  Vector v1 = _vertices.get(1).subtract(p0);
+        Vector v2 = _vertices.get(0).subtract(p0);*/
+
+		Vector v1 = vertices.get(1).subtract(p0).normalize();
+		Vector v2 = vertices.get(0).subtract(p0).normalize();
+
+		double sign = v.dotProduct(v1.crossProduct(v2));
+		if (isZero(sign)) return null;
+
+		boolean positive = sign > 0;
+		for (int i = vertices.size() - 1; i > 0; --i) {
+			v1 = v2;
+			//v2 = _vertices.get(i).subtract(p0);
+			v2 = vertices.get(i).subtract(p0).normalize();
+			sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
+			if (isZero(sign)) return null;
+			if (positive != (sign > 0)) return null;
+		}
+
+		intersection.get(0)._geometry = this;
+		return intersection;
 	}
 
 	@Override
