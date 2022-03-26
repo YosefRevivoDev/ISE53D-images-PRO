@@ -17,11 +17,18 @@ public class Geometries implements Intersectable {
 
     private List<Intersectable> _geometries = new LinkedList<>();
 
+    /**
+     * constructor
+     * @param _geometries
+     */
     public Geometries(Intersectable... _geometries) {
         add(_geometries);
     }
 
-
+    /**
+     * constructor that recieved array
+     * @param geometries
+     */
     public void Geometries(Intersectable... geometries) {
         _geometries.addAll(Arrays.asList(geometries));
     }

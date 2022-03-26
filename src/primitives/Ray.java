@@ -22,6 +22,7 @@ public class Ray {
         _p0 = p0;
         this.dir = dir.normalize();
     }
+
     public Point getPoint() { return (_p0);}
 
     public Point getP0() {

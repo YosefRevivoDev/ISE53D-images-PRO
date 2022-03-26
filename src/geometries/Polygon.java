@@ -84,6 +84,11 @@ public class Polygon implements Geometry {
 		size = vertices.length;
 	}
 
+	/**
+	 *Finding intersection points between the ray and The polygon
+	 * @param ray Ray
+	 * @return
+	 */
 	@Override
 	public List<Point> findIntsersections(Ray ray) {
 		List<Point> intersection = plane.findIntsersections(ray);
@@ -91,9 +96,6 @@ public class Polygon implements Geometry {
 
 		Point p0 = ray.getPoint();
 		Vector v = ray.getDir();
-
-      /*  Vector v1 = _vertices.get(1).subtract(p0);
-        Vector v2 = _vertices.get(0).subtract(p0);*/
 
 		Vector v1 = vertices.get(1).subtract(p0).normalize();
 		Vector v2 = vertices.get(0).subtract(p0).normalize();
@@ -104,7 +106,6 @@ public class Polygon implements Geometry {
 		boolean positive = sign > 0;
 		for (int i = vertices.size() - 1; i > 0; --i) {
 			v1 = v2;
-			//v2 = _vertices.get(i).subtract(p0);
 			v2 = vertices.get(i).subtract(p0).normalize();
 			sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
 			if (isZero(sign)) return null;
@@ -115,6 +116,11 @@ public class Polygon implements Geometry {
 		return intersection;
 	}
 
+	/**
+	 * get normal of point
+	 * @param point
+	 * @return
+	 */
 	@Override
 	public Vector getNormal(Point point) {
 		return plane.getNormal(null);

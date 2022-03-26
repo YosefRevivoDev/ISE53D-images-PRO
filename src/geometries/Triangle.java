@@ -57,7 +57,6 @@ public class Triangle extends Polygon {
             result.get(0)._geometry = this;
             return result;
         }
-
         return null;
     }
 }

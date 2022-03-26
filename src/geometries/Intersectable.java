@@ -32,6 +32,7 @@ public interface Intersectable {
             this._geometry = _geometry;
             this._point = _point;
         }
+
         /**
          * @return _point
          */

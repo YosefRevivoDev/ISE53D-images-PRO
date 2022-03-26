@@ -75,16 +75,27 @@ public class Plane implements Geometry {
         }
     }
 
+    /**
+     * @return p0
+     */
     public Point getP0() {
         return p0;
     }
 
-
+    /**
+     * get normal of point
+     * @param point
+     * @return
+     */
     @Override
     public Vector getNormal(Point point) {
         return normal;
     }
 
+    /**
+     * get normal empty
+     * @return
+     */
     public Vector getNormal(){return this.normal;}
 
     @Override

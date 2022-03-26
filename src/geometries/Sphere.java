@@ -22,11 +22,18 @@ public class Sphere implements Geometry{
         this.center = center;
     }
 
+    /**
+     * get center
+     * @return
+     */
     public Point getCenter(){
         return center;
     }
 
-
+    /**
+     * get radius
+     * @return
+     */
     public double getRadius(){
         return radius;
     }
