@@ -18,8 +18,6 @@ import java.util.List;
 
 class SphereTest {
 
-
-
     @Test
     public void testFindIntersections() {
         Sphere sphere = new Sphere(1d, new Point (1, 0, 0));
