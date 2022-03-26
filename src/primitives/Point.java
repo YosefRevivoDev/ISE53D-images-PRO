@@ -1,8 +1,6 @@
 package primitives;
 import geometries.Geometry;
 
-import java.util.Objects;
-
 
 /**
  * Produces a point in the plane that is represented by 3 values and in addition

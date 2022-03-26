@@ -5,10 +5,8 @@ import java.util.List;
 import primitives.Point;
 import primitives.Ray;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Geometries is the class representing collection of geometries according to composite pattern
@@ -44,13 +42,13 @@ public class Geometries implements Intersectable {
      * @return list of Point that intersect the Collection
      */
     @Override
-    public List<GeoPoint> findIntsersections(Ray ray) {
+    public List<Point> findIntsersections(Ray ray) {
 
         if (_geometries.isEmpty()) return null;
-        List<GeoPoint> intersections = null;
+        List<Point> intersections = null;
 
         for (Intersectable geo : _geometries) {
-            List<GeoPoint> tempIntersections = geo.findIntsersections(ray);
+            List<Point> tempIntersections = geo.findIntsersections(ray);
             if (tempIntersections != null) {
                 if (intersections == null)
                     intersections = new LinkedList<>();

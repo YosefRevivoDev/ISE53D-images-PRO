@@ -1,9 +1,7 @@
 package geometries;
 
 import primitives.*;
-
-import java.util.List;
-import static primitives.Util.*;
+import java.util.LinkedList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -24,46 +22,68 @@ public class Sphere implements Geometry{
         this.center = center;
     }
 
-    @Override
-    public List<GeoPoint> findIntsersections(Ray ray) {
-        Point p0 = ray.getPoint();
-        Vector v = ray.getDir();
-        Vector u;
-
-        try {
-            u = center.subtract(p0);   // p0 == center
-        } catch (IllegalArgumentException e) {
-            return List.of(new GeoPoint(this,ray.getTargetPoint(radius)));
-        }
-
-        double tm = alignZero(v.dotProduct(u));
-        double dSquared = (tm == 0) ? u.lengthSquared() : u.lengthSquared() - tm * tm;
-        double thSquared = alignZero(radius * radius - dSquared);
-
-        if (thSquared <= 0) return null;
-
-        double th = alignZero(Math.sqrt(thSquared));
-        if (th == 0) return null;
-
-        double t1 = alignZero(tm - th);
-        double t2 = alignZero(tm + th);
-
-        if (t1 <= 0 && t2 <= 0) return null;
-        if (t1 > 0 && t2 > 0) {
-            return List.of(new GeoPoint(this, (ray.getTargetPoint(t1)))
-                    ,new GeoPoint(this, (ray.getTargetPoint(t2))));//P1 , P2
-        }
-        if (t1 > 0)
-            return List.of(new GeoPoint(this,(ray.getTargetPoint(t1))));
-        else if (t2 > 0)
-            return List.of(new GeoPoint(this,(ray.getTargetPoint(t2))));
-        return null;
+    public Point getCenter(){
+        return center;
     }
 
+
+    public double getRadius(){
+        return radius;
+    }
+
+    /**
+     * Finding intersection points between the ray and The sphere
+     * @param ray Ray
+     * @return
+     */
+    @Override
+    public List<Point> findIntsersections(Ray ray) {
+        double r = this.radius;
+
+        // Special case: if point p0 == center, that mean that all we need to calculate
+        // is the radios mult scalar with the direction, and add p0
+        if (center.equals(ray.getP0())) {
+            LinkedList<Point> result = new LinkedList<Point>();
+            result.add(ray.getPoint(r));
+            return result;
+        }
+
+        Vector u = center.subtract(ray.getP0());
+        double tm = u.dotProduct(ray.getDir());
+        double d = Math.sqrt(alignZero(u.lengthSquared() - tm * tm));
+
+        if (d >= r) //also In case the cut is tangent to the object still return null - d = r
+            return null;
+
+        double th = Math.sqrt(r * r - d * d);
+        double t1 = tm + th;
+        double t2 = tm - th;
+
+        if(alignZero(t1) > 0 || alignZero(t2) > 0){
+            LinkedList<Point> result = new LinkedList<Point>();
+            if(alignZero(t1) > 0){
+                Point p1 = ray.getPoint(t1);
+                result.add(p1);
+            }
+            if(alignZero(t2) > 0){
+                Point p2 = ray.getPoint(t2);
+                result.add(p2);
+            }
+            return result;
+        }
+        else { //In case there are no intersections points
+            return null;
+        }
+    }
     @Override
     public Vector getNormal(Point point) {
         Vector normal = point.subtract(center);
         return normal.normalize();
+    }
+
+    @Override
+    public String toString(){
+        return "Point is: " + center + "\nradius is: " + radius;
     }
 
 }

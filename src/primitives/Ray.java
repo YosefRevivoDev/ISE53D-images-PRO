@@ -1,6 +1,6 @@
 package primitives;
 
-import java.util.Objects;
+import geometries.Intersectable;
 
 import static primitives.Util.isZero;
 
@@ -20,12 +20,16 @@ public class Ray {
      */
     public Ray(Point p0, Vector dir) {
         _p0 = p0;
-        this.dir = dir;
+        this.dir = dir.normalize();
     }
     public Point getPoint() { return (_p0);}
 
     public Point getP0() {
         return _p0;
+    }
+
+    public Point getPoint(double t) {
+        return getP0().add(getDir().scale(t));
     }
 
     public Vector getDir() { return (dir);}

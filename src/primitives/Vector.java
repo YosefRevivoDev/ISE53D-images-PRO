@@ -49,7 +49,7 @@ public class Vector extends Point {
      * @param vector
      * @return
      */
-    public Vector add(Vector vector) {
+    public Point add(Vector vector) {
         return new Vector(xyz.add(vector.xyz));
     }
 

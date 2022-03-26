@@ -2,8 +2,7 @@ package geometries;
 
 import primitives.*;
 import static primitives.Util.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
+
 import java.util.List;
 
 public class Plane implements Geometry {
@@ -46,7 +45,13 @@ public class Plane implements Geometry {
         }
     }
 
-    public List<GeoPoint> findIntsersections(Ray ray) {
+    /**
+     * Finding intersection points between the ray and The plane.
+     * @param ray Ray
+     * @return
+     */
+    @Override
+    public List<Point> findIntsersections(Ray ray) {
 
         Vector p0Q;
 
@@ -64,7 +69,7 @@ public class Plane implements Geometry {
         double t = alignZero(normal.dotProduct(p0Q) / nv);
 
         if (t > 0) {
-            return List.of(new GeoPoint(this, ray.getTargetPoint(t)));
+            return List.of(new Point(this, ray.getTargetPoint(t)));
         } else {
             return null;
         }
