@@ -45,6 +45,12 @@ public class Plane implements Geometry {
         }
     }
 
+    /**
+     * Finding intersection points between the ray and The plane.
+     * @param ray Ray
+     * @return
+     */
+    @Override
     public List<Point> findIntsersections(Ray ray) {
 
         Vector p0Q;

@@ -21,6 +21,13 @@ public class Triangle extends Polygon {
         super(p1, p2, p3);
     }
 
+
+    /**
+     * Finding intersection points between the ray and The triangle
+     * @param ray
+     * @return
+     */
+    @Override
     public List<Point> findIntsersections(Ray ray) {
         if (plane.findIntsersections(ray) == null) return null;
         List<Point> planeIntersections = plane.findIntsersections(ray);

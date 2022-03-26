@@ -31,7 +31,11 @@ public class Sphere implements Geometry{
         return radius;
     }
 
-
+    /**
+     * Finding intersection points between the ray and The sphere
+     * @param ray Ray
+     * @return
+     */
     @Override
     public List<Point> findIntsersections(Ray ray) {
         double r = this.radius;
