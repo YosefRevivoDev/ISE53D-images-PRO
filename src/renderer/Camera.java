@@ -125,33 +125,27 @@ public class Camera {
      */
     public Ray constructRay(int nX, int nY, int j, int i)  {
 
-        //--------------------Calculation of the center of the view plane--------------------
-
+        //Calculation of the center of the view plane
         Point pCenter = p0.add(vTo.scale(distance));
         double Ry = height / nY, Rx = width / nX;
 
-        //****If the center is on the grid — move it to the nearest upper left pixel****
+        //If the center is on the grid — move it to the nearest upper left pixel
         if (nX % 2 == 0)
             pCenter = pCenter.add(vRight.scale(-Rx / 2));
         if (nY % 2 == 0)
             pCenter = pCenter.add(vUp.scale(Ry / 2));
 
 
-        //---------------------Find the center point of the desired pixel--------------------
-
+        //Find the center point of the desired pixel
         double yI = -(i - (nY - 1) / 2) * Ry;
         double xJ = (j - (nX - 1) / 2) * Rx;
         Point pIJ = pCenter;
 
-        //********The conditions Prevent a situation that creates a zero vector*********
-        //******(When the desired pixel center is on one of the axes of the plane)******
+        //The conditions prevent a situation that creates a zero vector when the desired pixel center is on one of the axes of the plane
         if (xJ != 0)
             pIJ = pIJ.add(vRight.scale(xJ));
         if (yI != 0)
             pIJ = pIJ.add(vUp.scale(yI));
-        //******************************************************************************
-
-        //-----------------------------------------------------------------------------------
 
         return new Ray(p0, pIJ.subtract(p0));
     }
