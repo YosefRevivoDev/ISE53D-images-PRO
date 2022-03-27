@@ -11,6 +11,12 @@ public class Point {
     Double3 xyz;
     public Geometry _geometry;
     public Point _point;
+
+    /**
+     * A constant static variable that represents the "zero point"
+     */
+    public static final Point ZERO = new Point(0, 0, 0);
+
     /**
      * c'tor Gets a type of type Double3
      * @param xyz
