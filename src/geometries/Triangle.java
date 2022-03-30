@@ -50,12 +50,7 @@ public class Triangle extends Polygon {
 
         // if the intersection is inside triangle
         if ((d1 > 0.0 && d2 > 0.0 && d3 > 0.0) || (d1 < 0.0 && d2 < 0.0 && d3 < 0.0)) {
-            List<Point> result = new LinkedList<>();
-            for (Point geo : planeIntersections) {
-                result.add(new Point(this, geo.getPoint()));
-            }
-            result.get(0)._geometry = this;
-            return result;
+            return planeIntersections;
         }
         return null;
     }
