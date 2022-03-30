@@ -3,6 +3,7 @@ package geometries;
 import primitives.*;
 import static primitives.Util.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Plane implements Geometry {
@@ -52,27 +53,19 @@ public class Plane implements Geometry {
      */
     @Override
     public List<Point> findIntsersections(Ray ray) {
-
-        Vector p0Q;
-
-        try {
-            p0Q = p0.subtract(ray.getPoint());
-        } catch (IllegalArgumentException e) {
-            return null; // ray starts from point Q - no intersections
-        }
-
-
-        double nv = normal.dotProduct(ray.getDir());
-        if (isZero(nv)) //if the ray is parallel to the plane - no intersection
+        if (ray.getP0().equals(p0) || isZero(this.normal.dotProduct(ray.getDir()))
+                || isZero(this.normal.dotProduct(p0.subtract(ray.getP0()))))
             return null;
 
-        double t = alignZero(normal.dotProduct(p0Q) / nv);
-
-        if (t > 0) {
-            return List.of(new Point(this, ray.getTargetPoint(t)));
-        } else {
+        double t = (this.normal.dotProduct(p0.subtract(ray.getP0()))) / (this.normal.dotProduct(ray.getDir()));
+        if (t < 0) // In case there is no intersection with the plane return null
             return null;
-        }
+
+        //In case there is intersection with the plane return the point
+        Point p = ray.getPoint(t);
+        LinkedList<Point> result = new LinkedList<Point>();
+        result.add(p);
+        return result;
     }
 
     /**
@@ -101,8 +94,8 @@ public class Plane implements Geometry {
     @Override
     public String toString() {
         return "Plane{" +
-                "p0 =" + p0.toString() +
-                ", normal=" + normal.toString() +
+                "p0 =" + p0 +
+                ", normal=" + normal +
                 '}';
     }
 

@@ -9,9 +9,6 @@ import geometries.Geometry;
 public class Point {
 
     Double3 xyz;
-    public Geometry _geometry;
-    public Point _point;
-
     /**
      * A constant static variable that represents the "zero point"
      */
@@ -22,7 +19,7 @@ public class Point {
      * @param xyz
      */
     public Point(Double3 xyz) {
-         this.xyz = xyz;
+        this.xyz = xyz;
     }
 
     /**
@@ -36,27 +33,24 @@ public class Point {
         this.xyz = new Double3(d1, d2, d3);
     }
 
-    public double getX (){
-        return xyz.d1;
-    }
-
     /**
      * Boolean comparison function between objects
-     * @param obj
+     * @param o
      * @return
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (!(obj instanceof Point)) return false;
-        Point other = (Point) obj;
-        return xyz.equals(other.xyz);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point point = (Point) o;
+        return xyz.equals(point.xyz);
     }
+
 
     @Override
     public String toString() {
-        return xyz.toString();
+
+        return "Point "  + xyz ;
     }
 
     /**
@@ -78,19 +72,9 @@ public class Point {
         return new Vector(this.xyz.subtract(p1.xyz));
     }
 
-    /**
-     * @param _geometry
-     * @param _point
-     */
-    public Point(Geometry _geometry, Point _point) {
-        this._geometry = _geometry;
-        this._point = _point;
+    public double getX() {
+        return xyz.d1;
     }
 
-    /**
-     * @return _point
-     */
-    public Point getPoint(){
-        return _point;
-    }
+
 }

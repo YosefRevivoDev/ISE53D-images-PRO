@@ -135,7 +135,6 @@ public class Camera {
         if (nY % 2 == 0)
             pCenter = pCenter.add(vUp.scale(Ry / 2));
 
-
         //Find the center point of the desired pixel
         double yI = -(i - (nY - 1) / 2) * Ry;
         double xJ = (j - (nX - 1) / 2) * Rx;
@@ -149,6 +148,4 @@ public class Camera {
 
         return new Ray(p0, pIJ.subtract(p0));
     }
-
-
 }

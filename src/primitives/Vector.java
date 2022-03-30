@@ -13,7 +13,6 @@ public class Vector extends Point {
      * @param d3
      */
     public Vector(double d1, double d2, double d3) {
-
         this(new Double3(d1, d2, d3));
     }
 
@@ -36,11 +35,6 @@ public class Vector extends Point {
         if (obj == null) return false;
         if (!(obj instanceof Vector)) return false;
         return super.equals(obj);
-    }
-
-    @Override
-    public String toString() {
-        return "->" + super.toString();
     }
 
     /**
@@ -114,11 +108,9 @@ public class Vector extends Point {
      */
 
     public Vector normalize() {
-        xyz = scale(1 / length()).xyz;
-        return this;
+        double len = length();
+        if(len == 0)
+            throw new ArithmeticException("Divide by zero!");
+        return new Vector(xyz.reduce((len)));
     }
-
-
-
-
 }
