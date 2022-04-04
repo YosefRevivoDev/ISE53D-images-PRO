@@ -76,5 +76,26 @@ public class Point {
         return xyz.d1;
     }
 
+    /**
+     * Calculates the distance between two points squared
+     *
+     * @param point The other point
+     * @return The distance between two points squared
+     */
+    public double distanceSquared(Point point) {
 
+        return (xyz.d1 - point.xyz.d1) * (xyz.d1 - point.xyz.d1)
+                + (xyz.d2 - point.xyz.d2) * (xyz.d2 - point.xyz.d2)
+                + (xyz.d3 - point.xyz.d3) * (xyz.d3 - point.xyz.d3);
+    }
+
+    /**
+     * Calculates the distance between two points
+     *
+     * @param point The other point
+     * @return The distance between two points squared
+     */
+    public double distance(Point point) {
+        return Math.sqrt(distanceSquared(point));
+    }
 }
