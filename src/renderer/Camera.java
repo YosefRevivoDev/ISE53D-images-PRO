@@ -6,6 +6,20 @@ import primitives.Vector;
 
 public class Camera {
 
+    private ImageWriter imageWriter;
+
+    private RayTracerBase rayTracerBase;
+
+    public Camera setImageWriter(ImageWriter imageWriter) {
+        this.imageWriter = imageWriter;
+        return this;
+    }
+
+    public Camera setRayTracerBase(RayTracerBase rayTracerBase) {
+        this.rayTracerBase = rayTracerBase;
+        return this;
+    }
+
     /**
      * Camera constructor receiving three {@link Vector}.
      *
@@ -21,7 +35,6 @@ public class Camera {
         vRight = vTo.crossProduct(vUp).normalize();
         this.vUp = vUp.normalize();
         this.vTo = vTo.normalize();
-        ;
     }
 
     /**
@@ -116,7 +129,6 @@ public class Camera {
 
     /**
      * The function construct a ray from the camera towards a desired pixel
-     *
      * @param nX number of columns
      * @param nY number of rows
      * @param j  Pixel column index
@@ -127,6 +139,7 @@ public class Camera {
 
         //Calculation of the center of the view plane
         Point pCenter = p0.add(vTo.scale(distance));
+
         double Ry = height / nY, Rx = width / nX;
 
         //If the center is on the grid — move it to the nearest upper left pixel
@@ -148,4 +161,62 @@ public class Camera {
 
         return new Ray(p0, pIJ.subtract(p0));
     }
+
+    /**
+     * This function renders image's pixel color map from the scene included with
+     * the Renderer object
+     */
+    public void renderImage() {
+        try {
+            if (imageWriter == null)
+                throw new MissingResourceException("imageWriter field is empty", "ImageWriter", "imageWriter");
+            if (rayTracerBase == null)
+                throw new MissingResourceException("rayTracerBase field is empty", "RayTracerBase", "RayTracerBase");
+
+            int nX = imageWriter.getNx();
+            int nY = imageWriter.getNy();
+            for (int i = 0; i < nY; i++) {
+                for (int j = 0; j < nX; j++) {
+                    Ray ray = constructRay(nX, nY, j, i);
+                    Color pixelColor = rayTracerBase.traceRay(ray);
+                    imageWriter.writePixel(j, i, pixelColor);
+                }
+            }
+
+        } catch (MissingResourceException e) {
+            throw new UnsupportedOperationException("Not implemented yet" + e.getClassName());
+        }
+    }
+
+
+
+    /**
+     * The function sends the image writer lines (boundaries) in color and spacing
+     * that receiveded lengthwise and widthwise of the image
+     * @param interval The interval between the boundaries
+     * @param color    The color of the boundaries
+     */
+    public void printGrid(int interval, Color color) {
+        if (imageWriter == null)
+            throw new MissingResourceException("imageWriter field is empty", "ImageWriter", "imageWriter");
+
+        for (int i = 0; i < imageWriter.getNx(); i ++)
+            for (int j = 0; j < imageWriter.getNy(); j++)
+                if (i % interval == 0 && i != 0 || j % interval == 0 && j!=0)
+                    imageWriter.writePixel(j, i, color);
+
+        /*for (int j = interval; j < imageWriter.getNy() - 1; j += interval)
+            for (int i = 0; i < imageWriter.getNx(); i++)
+                imageWriter.writePixel(j, i, color);*/
+        }
+
+    /**
+     * The function calls the image writer to produce the image that given to it
+     */
+    public void writeToImage() {
+        if (imageWriter == null)
+            throw new MissingResourceException("imageWriter field is empty", "ImageWriter", "imageWriter");
+        imageWriter.writeToImage();
+    }
+
 }

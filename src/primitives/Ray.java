@@ -2,6 +2,8 @@ package primitives;
 
 import geometries.Intersectable;
 
+import java.util.List;
+
 import static primitives.Util.isZero;
 
 /**
@@ -43,6 +45,20 @@ public class Ray {
         return isZero(length ) ? _p0 : _p0.add(dir.scale(length));
     }
 
+    public Point findClosestPoint(List<Point> pointList) {
+        if (pointList == null || pointList.size() == 0)
+            return null;
+        Point closestPoint  = pointList.get(0);
+        double distance = _p0.distance(closestPoint );
+        for (Point point : pointList) {
+            double newDist = point.distance(_p0);
+            if (newDist < distance) {
+                distance = newDist;
+                closestPoint  = point;
+            }
+        }
+        return closestPoint ;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
