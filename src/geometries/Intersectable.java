@@ -5,14 +5,25 @@ import primitives.Ray;
 
 import java.util.*;
 
-public interface Intersectable {
+public abstract class Intersectable {
 
     /**
      * returns list of intersections between ray and the intersectable
      * @param ray Ray
      * @return list of intersections
      */
-    public List<Point> findIntsersections(Ray ray);
+    public abstract List<Point> findIntsersections(Ray ray);
+
+    @Override
+    public String toString() {
+        return "Intersectable{}";
+    }
+
+    public abstract List<GeoPoint> findGeoIntersections(Ray ray);
+
+
+    protected abstract List<GeoPoint> findGeoIntersectionsHelper (Ray ray);
+
 
     /**
      * GeoPoint is just a tuple holding

@@ -8,7 +8,7 @@ import java.util.List;
 
 import static primitives.Util.*;
 
-public class Tube implements Geometry {
+public class Tube extends Geometry {
 
     protected double radius;
     protected Ray axisRay;
@@ -30,7 +30,7 @@ public class Tube implements Geometry {
         return axisRay;
     }
 
-
+    @Override
     public List<Point> findIntsersections(Ray ray) {
         return null;
     }

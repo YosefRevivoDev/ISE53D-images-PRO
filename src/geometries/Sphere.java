@@ -7,7 +7,7 @@ import java.util.List;
 import static primitives.Util.alignZero;
 
 
-public class Sphere implements Geometry{
+public class Sphere extends Geometry{
 
     Point center;
     private double radius;
@@ -82,6 +82,7 @@ public class Sphere implements Geometry{
             return null;
         }
     }
+
     @Override
     public Vector getNormal(Point point) {
         Vector normal = point.subtract(center);
