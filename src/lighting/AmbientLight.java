@@ -9,7 +9,7 @@ public class AmbientLight extends Light {
     /**
      * c'tor default
      */
-    public AmbientLight(){
+    public AmbientLight() {
        super(Color.BLACK) ;
     }
 

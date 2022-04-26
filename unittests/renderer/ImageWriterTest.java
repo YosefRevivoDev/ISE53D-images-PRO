@@ -14,7 +14,7 @@ class ImageWriterTest {
 
         for(int i = 0; i < imageWriter.getNx(); i++)
             for(int j = 0; j < imageWriter.getNy(); j++)
-                imageWriter.writePixel(i, j, new Color(200, 50, 70));
+                imageWriter.writePixel(i, j, new Color(30, 50, 200));
 
         final int interval = 50;
         for(int i = 0; i < imageWriter.getNx() - 1; i += interval)
