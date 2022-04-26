@@ -54,8 +54,8 @@ public class LightsTests {
         ImageWriter imageWriter = new ImageWriter("lightSphereDirectional", 500, 500);
         camera1.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene1)) //
-                .renderImage() //
-                .writeToImage(); //
+                .renderImage(); //
+                camera1.writeToImage(); //
     }
 
     /**
@@ -69,8 +69,8 @@ public class LightsTests {
         ImageWriter imageWriter = new ImageWriter("lightSpherePoint", 500, 500);
         camera1.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene1)) //
-                .renderImage() //
-                .writeToImage(); //
+                .renderImage(); //
+        camera1.writeToImage(); //
     }
 
     /**
@@ -84,8 +84,8 @@ public class LightsTests {
         ImageWriter imageWriter = new ImageWriter("lightSphereDirectional", 500, 500);
         camera1.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene1)) //
-                .renderImage() //
-                .writeToImage(); //
+                .renderImage(); //
+        camera1.writeToImage(); //
     }
 
     /**
@@ -99,8 +99,8 @@ public class LightsTests {
         ImageWriter imageWriter = new ImageWriter("lightTrianglesDirectional", 500, 500);
         camera2.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene2)) //
-                .renderImage() //
-                .writeToImage(); //
+                .renderImage(); //
+        camera1.writeToImage(); //
     }
 
     /**
@@ -114,8 +114,8 @@ public class LightsTests {
         ImageWriter imageWriter = new ImageWriter("lightTrianglesPoint", 500, 500);
         camera2.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene2)) //
-                .renderImage() //
-                .writeToImage(); //
+                .renderImage(); //
+        camera1.writeToImage(); //
     }
 
     /**
@@ -129,8 +129,8 @@ public class LightsTests {
         ImageWriter imageWriter = new ImageWriter("lightTrianglesSpot", 500, 500);
         camera2.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene2)) //
-                .renderImage() //
-                .writeToImage(); //
+                .renderImage(); //
+        camera1.writeToImage(); //
     }
 
 }

@@ -25,8 +25,9 @@ public abstract class Geometry extends Intersectable {
      *
      * @param emission
      */
-    public void setEmission(Color emission) {
+    public Geometry setEmission(Color emission) {
         this.emission = emission;
+        return this;
     }
 
     /**
