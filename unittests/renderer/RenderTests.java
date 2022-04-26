@@ -27,7 +27,9 @@ public class RenderTests {
                         new Double3(1, 1, 1))) //
                 .setBackground(new Color(75, 127, 90));
 
-        scene.geometries.add(new Sphere(new Point(0, 0, -100), 50d),
+        scene.getGeometries().add(
+                new Sphere(50, new Point(0, 0, -100)),
+                //up left
                 new Triangle(new Point(-100, 0, -100), new Point(0, 100, -100), new Point(-100, 100, -100)), // up
                 // left
                 new Triangle(new Point(-100, 0, -100), new Point(0, -100, -100), new Point(-100, -100, -100)), // down
@@ -55,8 +57,8 @@ public class RenderTests {
         Scene scene = new Scene("Test scene")//
                 .setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.2))); //
 
-        scene.geometries.add( //
-                new Sphere(new Point(0, 0, -100), 50),
+        scene.getGeometries().add( //
+                new Sphere(50, new Point(0, 0, -100)),
                 // up left
                 new Triangle(new Point(-100, 0, -100), new Point(0, 100, -100), new Point(-100, 100, -100))
                         .setEmission(new Color(GREEN)),
@@ -64,14 +66,14 @@ public class RenderTests {
                 new Triangle(new Point(-100, 0, -100), new Point(0, -100, -100), new Point(-100, -100, -100))
                         .setEmission(new Color(RED)),
                 // down right
-                new Triangle(new Point(100, 0, -100), new Point(0, -100, -100), new Point(100, -100, -100))
+                 new Triangle(new Point(100, 0, -100), new Point(0, -100, -100), new Point(100, -100, -100))
                         .setEmission(new Color(BLUE)));
 
         Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
                 .setVPDistance(100) //
                 .setVPSize(500, 500) //
                 .setImageWriter(new ImageWriter("color render test", 1000, 1000))
-                .setRayTracerbase(new RayTracerBasic(scene));
+                .setRayTracerBase(new RayTracerBasic(scene));
 
         camera.renderImage();
         camera.printGrid(100, new Color(WHITE));

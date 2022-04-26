@@ -1,7 +1,9 @@
 package geometries;
 
-import primitives.Point;
+import primitives.*;
 import primitives.Ray;
+import java.util.stream.Collectors;
+import java.util.Objects;
 
 import java.util.*;
 
@@ -12,15 +14,14 @@ public abstract class Intersectable {
      * @param ray Ray
      * @return list of intersections
      */
-    public abstract List<Point> findIntsersections(Ray ray);
-
-    @Override
-    public String toString() {
-        return "Intersectable{}";
+    public List<Point> findIntersections(Ray ray) {
+        var geoList = findGeoIntersections(ray);
+        return geoList == null ? null : geoList.stream().map(gp -> gp._point).toList();
     }
 
-    public abstract List<GeoPoint> findGeoIntersections(Ray ray);
-
+    public  List<GeoPoint> findGeoIntersections(Ray ray)    {
+        return findGeoIntersectionsHelper(ray);
+    }
 
     protected abstract List<GeoPoint> findGeoIntersectionsHelper (Ray ray);
 
@@ -66,5 +67,9 @@ public abstract class Intersectable {
             return Objects.equals(_geometry, geoPoint._geometry) &&
                     Objects.equals(_point, geoPoint._point);
         }
+    }
+    @Override
+    public String toString() {
+        return "Intersectable{}";
     }
  }

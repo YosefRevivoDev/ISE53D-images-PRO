@@ -52,20 +52,26 @@ public class Plane extends Geometry {
      * @return
      */
     @Override
-    public List<Point> findIntsersections(Ray ray) {
-        if (ray.getP0().equals(p0) || isZero(this.normal.dotProduct(ray.getDir()))
-                || isZero(this.normal.dotProduct(p0.subtract(ray.getP0()))))
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        Point P0=ray.getP0();
+        Vector v=ray.getDir();
+        Vector n=normal;
+
+        // denominator
+        double nv = n.dotProduct(v);
+
+        if (isZero(nv))
             return null;
 
-        double t = (this.normal.dotProduct(p0.subtract(ray.getP0()))) / (this.normal.dotProduct(ray.getDir()));
-        if (t < 0) // In case there is no intersection with the plane return null
-            return null;
-
-        //In case there is intersection with the plane return the point
-        Point p = ray.getPoint(t);
-        LinkedList<Point> result = new LinkedList<Point>();
-        result.add(p);
-        return result;
+        Vector P0_Q= p0.subtract(P0);
+        double t = alignZero( n.dotProduct(P0_Q)/nv);
+        // if t<0 thn the ray is not in the right direction
+        //if t==0 the ray origin alay on the
+        if(t > 0 ) {
+            Point P = P0.add(v.scale(t));
+            return List.of(new GeoPoint(this,P));// returns a Geopoint
+        }
+        return null ;
     }
 
     /**

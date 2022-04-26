@@ -26,25 +26,25 @@ public class GeometriesTest {
 
         //TC01: Objects Collection is empty (0 points)
         Geometries geometries = new Geometries();
-        assertEquals(null, geometries.findIntsersections(new Ray(new Point(5.07,-2.24,0), new Vector(-5.07, 5.24, 0.62))),
+        assertEquals(null, geometries.findIntersections(new Ray(new Point(5.07,-2.24,0), new Vector(-5.07, 5.24, 0.62))),
                 "Collection is empty");
 
         geometries.add(sphere, triangle, plane);
 
         //TC02: No geometry is intersected (0 points)
-        assertEquals(null, geometries.findIntsersections(new Ray(new Point(2,-3,0), new Vector(5, 0, 0))),
+        assertEquals(null, geometries.findIntersections(new Ray(new Point(2,-3,0), new Vector(5, 0, 0))),
                 "No geometry is intersected");
 
         //TC03: Only one geometry is intersected (1 point)
-        assertEquals(1, (geometries.findIntsersections(new Ray(new Point(2,-3,0), new Vector(-2, 1, 1.94)))).size(),"one geometry is intersected");
+        assertEquals(1, (geometries.findIntersections(new Ray(new Point(2,-3,0), new Vector(-2, 1, 1.94)))).size(),"one geometry is intersected");
 
         //TC04: All the geometries are intersected (4 points)
-        assertEquals(4, (geometries.findIntsersections(new Ray(new Point(5.07,-2.24,0), new Vector(-5.07, 5.24, 0.62)))).size(),"All geometries are intersected");
+        assertEquals(4, (geometries.findIntersections(new Ray(new Point(5.07,-2.24,0), new Vector(-5.07, 5.24, 0.62)))).size(),"All geometries are intersected");
 
         // =============== Boundary Values Tests ==================
 
         //TC11: Many (But not All) geometries are intersected (2 points)
-        assertEquals(2, (geometries.findIntsersections(new Ray(new Point(2,-3,0), new Vector(-2, 6, 0.62)))).size(), "Not all geometries intersected");
+        assertEquals(2, (geometries.findIntersections(new Ray(new Point(2,-3,0), new Vector(-2, 6, 0.62)))).size(), "Not all geometries intersected");
 
     }
 }

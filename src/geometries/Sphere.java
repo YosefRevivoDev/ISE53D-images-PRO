@@ -44,15 +44,14 @@ public class Sphere extends Geometry{
      * @return
      */
     @Override
-    public List<Point> findIntsersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         double r = this.radius;
-
+        Point P0 = ray.getP0();
+        Vector v = ray.getDir();
         // Special case: if point p0 == center, that mean that all we need to calculate
         // is the radios mult scalar with the direction, and add p0
         if (center.equals(ray.getP0())) {
-            LinkedList<Point> result = new LinkedList<Point>();
-            result.add(ray.getPoint(r));
-            return result;
+            return List.of(new GeoPoint(this, center.add(v.scale(radius))) );
         }
 
         Vector u = center.subtract(ray.getP0());
@@ -62,25 +61,29 @@ public class Sphere extends Geometry{
         if (d >= r) //also In case the cut is tangent to the object still return null - d = r
             return null;
 
-        double th = Math.sqrt(r * r - d * d);
-        double t1 = tm + th;
-        double t2 = tm - th;
+        double th = alignZero(Math.sqrt(radius * radius - d * d)); // distance from p1 to intersection with d
+        double t1 = alignZero(tm - th); // from p0 to p1
+        double t2 = alignZero(tm + th);// from p0 to p2
 
-        if(alignZero(t1) > 0 || alignZero(t2) > 0){
-            LinkedList<Point> result = new LinkedList<Point>();
-            if(alignZero(t1) > 0){
-                Point p1 = ray.getPoint(t1);
-                result.add(p1);
-            }
-            if(alignZero(t2) > 0){
-                Point p2 = ray.getPoint(t2);
-                result.add(p2);
-            }
-            return result;
+        if (t1 > 0 && t2 > 0) // take only t > 0 (going in the right direction)
+        {
+//            Point P1 = P0.add(v.scale(t1));
+//            Point P2 = P0.add(v.scale(t2));
+            Point P1 =ray.getPoint(t1);
+            Point P2 =ray.getPoint(t2);
+            return List.of(new GeoPoint(this, P1),new GeoPoint(this, P2));
         }
-        else { //In case there are no intersections points
-            return null;
+        if (t1 > 0) {
+//            Point P1 = P0.add(v.scale(t1));
+            Point P1 =ray.getPoint(t1);
+            return List.of(new GeoPoint(this, P1));
         }
+        if (t2 > 0) {
+//            Point P2 = P0.add(v.scale(t2));
+            Point P2 =ray.getPoint(t2);
+            return List.of(new GeoPoint(this, P2));
+        }
+        return null;
     }
 
     @Override

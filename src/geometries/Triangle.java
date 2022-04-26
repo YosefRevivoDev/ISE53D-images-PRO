@@ -27,9 +27,9 @@ public class Triangle extends Polygon {
      * @return
      */
     @Override
-    public List<Point> findIntsersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
 
-        List<Point> planeIntersections = plane.findIntsersections(ray);
+        List<GeoPoint> planeIntersections = plane.findGeoIntersections(ray);
 
         if (planeIntersections == null){
             return null;
@@ -55,10 +55,10 @@ public class Triangle extends Polygon {
         double d3 = n3.dotProduct(v);
 
         // if the intersection is inside triangle
-        if ((d1 > 0.0 && d2 > 0.0 && d3 > 0.0) || (d1 < 0.0 && d2 < 0.0 && d3 < 0.0)) {
-            return planeIntersections;
+        if ((d1 > 0 && d2 > 0 && d3 > 0) || (d1 < 0 && d2 < 0 && d3 < 0)) {
+            return List.of(new GeoPoint(this,planeIntersections.get(0)._point));
         }
-        return super.findIntsersections(ray);
+        return null;
     }
 
     @Override

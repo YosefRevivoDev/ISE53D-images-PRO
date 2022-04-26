@@ -65,47 +65,21 @@ public class Camera {
      * The distance of the view plane from the camera
      */
     private double distance;
-    /**
-     * @return the p0
-     */
-    public Point getP0() {
-        return p0;
+
+    public void setP0(Point p0) {
+        this.p0 = p0;
     }
-    /**
-     * @return the vUp
-     */
-    public Vector getvUp() {
-        return vUp;
+
+    public void setvUp(Vector vUp) {
+        this.vUp = vUp;
     }
-    /**
-     * @return the vTo
-     */
-    public Vector getvTo() {
-        return vTo;
+
+    public void setvTo(Vector vTo) {
+        this.vTo = vTo;
     }
-    /**
-     * @return the vRight
-     */
-    public Vector getvRight() {
-        return vRight;
-    }
-    /**
-     * @return the width
-     */
-    public double getWidth() {
-        return width;
-    }
-    /**
-     * @return the height
-     */
-    public double getHeight() {
-        return height;
-    }
-    /**
-     * @return the distance
-     */
-    public double getDistance() {
-        return distance;
+
+    public void setvRight(Vector vRight) {
+        this.vRight = vRight;
     }
 
     /**
@@ -187,8 +161,6 @@ public class Camera {
             throw new UnsupportedOperationException("Not implemented yet" + e.getClassName());
         }
     }
-
-
 
     /**
      * The function sends the image writer lines (boundaries) in color and spacing

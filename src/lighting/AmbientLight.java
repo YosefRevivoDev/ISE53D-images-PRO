@@ -4,15 +4,13 @@ import primitives.Color;
 import primitives.Double3;
 
 
-public class AmbientLight  {
-
-    private Color intensity;
+public class AmbientLight extends Light {
 
     /**
      * c'tor default
      */
     public AmbientLight(){
-       this.intensity = Color.BLACK;
+       super(Color.BLACK) ;
     }
 
     /**
@@ -21,14 +19,6 @@ public class AmbientLight  {
      * @param Ka מקדם הנחתה
      */
     public AmbientLight(Color Ia, Double3 Ka) {
-        this.intensity = Ia.scale(Ka);
-    }
-
-    /**
-     * get intensity
-     * @return
-     */
-    public Color getIntensity(){
-        return (intensity);
+        super(Ia.scale(Ka)) ;
     }
 }

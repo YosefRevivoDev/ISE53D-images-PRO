@@ -1,4 +1,4 @@
-
+package geometries;
 
 import org.junit.jupiter.api.Test;
 import primitives.*;
@@ -113,7 +113,7 @@ import renderer.Camera;
 
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++) {
-                List<Point> intsPoints = shape.findIntsersections(cam.constructRay(3, 3, j, i));
+                List<Point> intsPoints = shape.findIntersections(cam.constructRay(3, 3, j, i));
                 if (intsPoints != null)
                     count += intsPoints.size();
             }

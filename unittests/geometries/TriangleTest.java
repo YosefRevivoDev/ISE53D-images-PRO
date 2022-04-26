@@ -33,25 +33,25 @@ public class TriangleTest {
 
         // TC01: Ray's line is inside triangle (1 point)
         assertEquals(List.of(new Point(0.48, 0.52, 0.23)),
-                triangle.findIntsersections(new Ray(new Point(-1.6, 0, 0), new Vector(2.08, 0.52,0.23))),"line is inside triangle");
+                triangle.findIntersections(new Ray(new Point(-1.6, 0, 0), new Vector(2.08, 0.52,0.23))),"line is inside triangle");
 
         // TC02: Ray's line is outside against edge (0 points)
-        assertEquals(null, triangle.findIntsersections(new Ray(new Point(-1.6, 0, 0), new Vector(1.6, 1,0.33))),"line is outside against edge");
+        assertEquals(null, triangle.findIntersections(new Ray(new Point(-1.6, 0, 0), new Vector(1.6, 1,0.33))),"line is outside against edge");
 
         // TC03: Ray's line is outside against vertex (0 points)
-        assertEquals(null, triangle.findIntsersections(new Ray(new Point(-1.6, 0, 0), new Vector(2.1, 0.5,1.31))),"line is outside against vertex" );
+        assertEquals(null, triangle.findIntersections(new Ray(new Point(-1.6, 0, 0), new Vector(2.1, 0.5,1.31))),"line is outside against vertex" );
 
 
         // =============== Boundary Values Tests ==================
 
         // TC11: Ray's line is on edge (0 points)
-        assertEquals(null, triangle.findIntsersections(new Ray(new Point(-1.6, 0, 0), new Vector(1.76, 0.84,0.33))),"line is on edge");
+        assertEquals(null, triangle.findIntersections(new Ray(new Point(-1.6, 0, 0), new Vector(1.76, 0.84,0.33))),"line is on edge");
 
         //TC12: Ray's line is on vertex (O points)
-        assertEquals(null, triangle.findIntsersections(new Ray(new Point(-1.6, 0, 0), new Vector(2.1, 0.5,1))),"line is on vertex");
+        assertEquals(null, triangle.findIntersections(new Ray(new Point(-1.6, 0, 0), new Vector(2.1, 0.5,1))),"line is on vertex");
 
         //TC13: Ray's line is on edge's continuation (0 points)
-        assertEquals(null, triangle.findIntsersections(new Ray(new Point(-1.6, 0, 0), new Vector(1.9, 0.7,1.41))),"line is on edge's continuation");
+        assertEquals(null, triangle.findIntersections(new Ray(new Point(-1.6, 0, 0), new Vector(1.9, 0.7,1.41))),"line is on edge's continuation");
     }
 
     /**
