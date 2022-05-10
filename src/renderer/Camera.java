@@ -1,24 +1,21 @@
 package renderer;
 
-import java.util.*;
+import java.util.MissingResourceException;
+import static primitives.Util.isZero;
 import primitives.*;
 import primitives.Vector;
 
 public class Camera {
+    private Point p0;
+    private Vector vUp;
+    private Vector vTo;
+    private Vector vRight;
+    private double width;
+    private double height;
+    private double distance;
 
     private ImageWriter imageWriter;
-
     private RayTracerBase rayTracerBase;
-
-    public Camera setImageWriter(ImageWriter imageWriter) {
-        this.imageWriter = imageWriter;
-        return this;
-    }
-
-    public Camera setRayTracerBase(RayTracerBase rayTracerBase) {
-        this.rayTracerBase = rayTracerBase;
-        return this;
-    }
 
     /**
      * Camera constructor receiving three {@link Vector}.
@@ -28,43 +25,17 @@ public class Camera {
      * @param vTo The direction in which the camera is facing
      */
     public Camera(Point p0, Vector vTo, Vector vUp) {
-        if (!Util.isZero(vUp.dotProduct(vTo)))
+        if (!isZero(vUp.dotProduct(vTo))) {
             throw new IllegalArgumentException("\"up and to\" vectors are not orthogonal");
+        }
         this.p0 = p0;
 
-        vRight = vTo.crossProduct(vUp).normalize();
         this.vUp = vUp.normalize();
         this.vTo = vTo.normalize();
+        this.vRight = vTo.crossProduct(vUp).normalize();
+
     }
 
-    /**
-     * the position of the camera
-     */
-    private Point p0;
-    /**
-     * "Rotate" the camera
-     */
-    private Vector vUp;
-    /**
-     * the direction in which the camera is facing
-     */
-    private Vector vTo;
-    /**
-     * the direction of the right side of the camera
-     */
-    private Vector vRight;
-    /**
-     * the width of the view plane
-     */
-    private double width;
-    /**
-     * the height of the view plane
-     */
-    private double height;
-    /**
-     * The distance of the view plane from the camera
-     */
-    private double distance;
 
     public void setP0(Point p0) {
         this.p0 = p0;
@@ -140,7 +111,7 @@ public class Camera {
      * This function renders image's pixel color map from the scene included with
      * the Renderer object
      */
-    public void renderImage() {
+    public Camera renderImage() {
         try {
             if (imageWriter == null)
                 throw new MissingResourceException("imageWriter field is empty", "ImageWriter", "imageWriter");
@@ -160,6 +131,7 @@ public class Camera {
         } catch (MissingResourceException e) {
             throw new UnsupportedOperationException("Not implemented yet" + e.getClassName());
         }
+        return this;
     }
 
     /**
@@ -191,4 +163,13 @@ public class Camera {
         imageWriter.writeToImage();
     }
 
+    public Camera setImageWriter(ImageWriter imageWriter) {
+        this.imageWriter = imageWriter;
+        return this;
+    }
+
+    public Camera setRayTracerBase(RayTracerBase rayTracerBase) {
+        this.rayTracerBase = rayTracerBase;
+        return this;
+    }
 }
