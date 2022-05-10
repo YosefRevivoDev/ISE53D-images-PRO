@@ -46,33 +46,6 @@ public class Plane extends Geometry {
         }
     }
 
-    /**
-     * Finding intersection points between the ray and The plane.
-     * @param ray Ray
-     * @return
-     */
-    @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        Point P0=ray.getP0();
-        Vector v=ray.getDir();
-        Vector n=normal;
-
-        // denominator
-        double nv = n.dotProduct(v);
-
-        if (isZero(nv))
-            return null;
-
-        Vector P0_Q= p0.subtract(P0);
-        double t = alignZero( n.dotProduct(P0_Q)/nv);
-        // if t<0 thn the ray is not in the right direction
-        //if t==0 the ray origin alay on the
-        if(t > 0 ) {
-            Point P = P0.add(v.scale(t));
-            return List.of(new GeoPoint(this,P));// returns a Geopoint
-        }
-        return null ;
-    }
 
     /**
      * @return p0
@@ -104,5 +77,36 @@ public class Plane extends Geometry {
                 ", normal=" + normal +
                 '}';
     }
+    /**
+     * Finding intersection points between the ray and The plane.
+     * @param ray Ray
+     * @return
+     */
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        Point P0 = ray.getP0();
+        Vector v = ray.getDir();
+        Vector n = normal;
 
+        // denominator
+        double nv = n.dotProduct(v);
+
+        if (isZero(nv))
+            return null;
+
+        Vector P0_Q = p0.subtract(P0);
+        double t = alignZero(n.dotProduct(P0_Q) / nv);
+
+        if (alignZero(t - maxDistance) > 0) {
+            return null;
+        }
+
+        // if t<0 thn the ray is not in the right direction
+        //if t==0 the ray origin alay on the
+        if (t > 0) {
+            Point P = P0.add(v.scale(t));
+            return List.of(new GeoPoint(this, P));// returns a Geopoint
+        }
+        return null;
+    }
 }

@@ -90,7 +90,7 @@ public class Polygon extends Geometry {
 	 * @return
 	 */
 	@Override
-	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
 		/*List<Point> intersection = plane.findIntsersections(ray);
 		if (intersection == null) return null;
 
@@ -102,6 +102,7 @@ public class Polygon extends Geometry {
 
 		double sign = v.dotProduct(v1.crossProduct(v2));
 		if (isZero(sign)) return null;
+
 
 		boolean positive = sign > 0;
 		for (int i = vertices.size() - 1; i > 0; --i) {

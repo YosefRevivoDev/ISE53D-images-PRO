@@ -13,7 +13,7 @@ public class GeometriesTest {
 
     /**
      * Test Method for
-     * {@link Geometries#findIntsersections(Ray)}
+     * {@link Geometries#findIntersections(Ray)}
      */
     @Test
     public void findIntersections() {
