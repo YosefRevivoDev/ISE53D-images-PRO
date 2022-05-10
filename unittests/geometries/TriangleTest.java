@@ -20,7 +20,7 @@ public class TriangleTest {
 
     /**
      * Test Method for
-     * {@link Triangle#findIntsersections(Ray)}
+     * {@link Triangle#testFindIntersections()}
      */
     @Test
     public void testFindIntersections() {

@@ -47,6 +47,10 @@ class CylinderTest {
             //TC05: normal from point on surface and base 2
             assertEquals(v, cy.getNormal(new Point(0,1,2)),"Wrong Cylinder getNormal() from point on base 1" );
     }
+
+    @Test
+    void testFindIntersections() {
+    }
 }
 
 

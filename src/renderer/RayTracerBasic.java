@@ -13,7 +13,7 @@ import static primitives.Util.alignZero;
 
 public class RayTracerBasic extends RayTracerBase {
 
-
+    private static final double DELTA = 0.1;
     /**
      * RayTracerBasic constructor receiving {@link scene}.
      *
@@ -78,6 +78,26 @@ public class RayTracerBasic extends RayTracerBase {
         Vector r = l.subtract(n.scale(l.dotProduct(n) * 2)).normalize();
         return material.kS.scale( Math.pow(Math.max(0, r.dotProduct(v.scale(-1d))), material.nShininess));
 
+    }
+
+    /**
+     * checks whether a point on  a geometry is shaded
+     * @param gp
+     * @param lightSource
+     * @param n
+     * @param nl
+     * @return
+     */
+    private boolean unshaded(GeoPoint gp, LightSource lightSource, Vector n, double nl, double nv, Vector l){
+        Point point = gp._point;
+        //  Vector l = lightSource.getL(point);
+        Vector lightDirection  = l.scale(-1);
+        Vector delVector = n.scale(nv < 0 ? DELTA : -DELTA);
+        Point pointRay = point.add(delVector);
+        Ray lightRay = new Ray(gp._point, lightDirection);
+        double maxDistance = lightSource.getDistance(point);
+        List<GeoPoint> intersections = scene.getGeometries().findGeoIntersections(lightRay, maxDistance);
+        return intersections == null;
     }
 }
 
