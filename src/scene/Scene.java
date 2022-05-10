@@ -7,6 +7,7 @@ import primitives.Color;
 import java.util.LinkedList;
 import java.util.List;
 
+
 public class Scene {
 
     public String name;
@@ -81,6 +82,8 @@ public class Scene {
         return this;
     }
 
+
+
     public static class SceneBuilder {
         private final String name;
         public List<LightSource> lights = new LinkedList<>();
@@ -97,7 +100,7 @@ public class Scene {
             this.name = name;
         }
 
-        ////chaining methods
+        //chaining methods
         public SceneBuilder setBackground(Color background) {
             this.background = background;
             return this;
@@ -115,7 +118,6 @@ public class Scene {
 
         public Scene build() {
             Scene scene = new Scene(this);
-            ///
             return scene;
         }
     }

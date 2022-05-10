@@ -1,4 +1,4 @@
-package renderer;
+package lighting;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class ShadowTests {
             .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(30));
     private Material trMaterial = new Material().setkD(0.5).setkS(0.5).setnShininess(30);
 
-    private Scene scene = new Scene("Test scene");
+    private Scene scene = new Scene.SceneBuilder("Test scene").build();
     private Camera camera = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
             .setVPSize(200, 200).setVPDistance(1000) //
             .setRayTracerBase(new RayTracerBasic(scene));
