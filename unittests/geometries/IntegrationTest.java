@@ -2,122 +2,108 @@ package geometries;
 
 import org.junit.jupiter.api.Test;
 import primitives.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static primitives.Point.ZERO;
-
-import java.util.List;
- import geometries.*;
- import primitives.*;
+import primitives.Vector;
 import renderer.Camera;
 
+import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
- * Testing Integration between camera and Intersectable shapes
- *
- * @author Shai&Avishay
- *
+ * testing integration of camera various functionalities
+ * through the viewPlane
  */
- class integrationTests {
+public class IntegrationTest
+{
+    static final Point ZERO_POINT = new Point(0, 0, 0);
+    Camera camera = new Camera(ZERO_POINT, new Vector(0, 0, -1), new Vector(0, 1, 0))
+            .setVPDistance(1)
+            .setVPSize(3,3);
 
     /**
-     * Test method for Intersections of rays that coming out of a {@link Camera}
-     * with {@link Sphere}.
+     * function to create rays for all the picels
+     * @param Nx amount of pixels in the width
+     * @param Ny amount of pixles in the height
+     * @return
      */
-    @Test
-    public void SphereIntegrationTests() {
-
-        // TC01: Sphere at front of the view plane (2 points)
-        Camera cam = new Camera(new Point(0, 0, 0), new Vector(0, 0, -1), new Vector(0, 1, 0));
-        cam.setVPDistance(1);
-        cam.setVPSize(3, 3);
-        Sphere sph = new Sphere(1, new Point(0, 0, -3));
-        assertEquals(countIntersections(cam, sph), 2, "Wrong Integration - Sphere at front of the view plane");
-
-        // TC02: Sphere between view plane and camera (18 points)
-        cam = new Camera(new Point(0, 0, 0.5), new Vector(0, 0, -1), new Vector(0, 1, 0));
-        cam.setVPDistance(1);
-        cam.setVPSize(3, 3);
-        sph = new Sphere(2.5, new Point(0, 0, -2.5));
-        assertEquals(countIntersections(cam, sph), 18, "Wrong Integration - Sphere at front of the view plane Integration - Sphere between view plane and camera");
-
-        // TC03: Sphere between view plane and camera (10 points)
-        sph = new Sphere(2, new Point(0, 0, -2));
-        assertEquals(countIntersections(cam, sph), 10, "Wrong Integration - Sphere at front of the view plane Integration - Sphere in front of the camera");
-
-        // TC04: Camera and view plane inside the sphere (9 points)
-        sph = new Sphere(4, new Point(0, 0, -2));
-        assertEquals(countIntersections(cam, sph), 9, "Wrong Integration - Sphere at front of the view plane Integration - Sphere in front of the camera");
-
-        // TC05: Sphere behind the camera (0 points)
-        sph = new Sphere(0.5, new Point(0, 0, 1));
-        assertEquals(countIntersections(cam, sph), 0, "Wrong Integration - Sphere at front of the view plane Integration - Sphere behind the camera");
-
-    }
-
-    /**
-     * Test method for Intersections of rays that coming out of a camera with
-     * {@link Plane}.
-     */
-    @Test
-    public void PlaneIntegrationTests() {
-        // TC01: Plane parallel to the view plane (9 points)
-        Camera cam = new Camera(new Point(0, 0, 0), new Vector(0, 0, -1), new Vector(0, 1, 0));
-        cam.setVPDistance(1);
-        cam.setVPSize(3, 3);
-        Plane pl = new Plane(new Point(0, 0, -5), new Vector(0, 0, 1));
-        assertEquals(countIntersections(cam, pl), 9, "Wrong Integration - Sphere at front of the view plane Integration - Plane parallel to the view plane");
-
-        // TC02: Plane is tilted at the top a little down (9 points)
-        pl = new Plane(new Point(0, 0, -5), new Vector(0, -0.5, 1));
-        assertEquals(countIntersections(cam, pl), 9, "Wrong Integration - Sphere at front of the view plane Integration - Plane is tilted at the top a little down");
-
-        // TC03: Plane is parallel to all the rays coming out from the bottom of the
-        // view plane (6 points)
-        pl = new Plane(new Point(0, 0, -5), new Vector(0, -1, 1));
-        assertEquals(countIntersections(cam, pl), 6, "Wrong Integration - Sphere at front of the view plane Integration - Plane is parallel to all the rays coming out from the bottom of the view plane");
-
-    }
-
-    /**
-     * Test method for Intersections of rays that coming out of a camera with
-     * {@link Triangle}.
-     */
-    @Test
-    public void TriangleIntegrationTests() {
-        // TC01: A triangle located in front of the central pixel (1 points)
-        Camera cam = new Camera(new Point(0, 0, 0), new Vector(0, 0, -1), new Vector(0, 1, 0));
-        cam.setVPDistance(1);
-        cam.setVPSize(3, 3);
-        Triangle tr = new Triangle(new Point(0, 1, -2), new Point(1, -1, -2), new Point(-1, -1, -2));
-        assertEquals(countIntersections(cam, tr), 1, "Wrong Integration - Sphere at front of the view plane Integration - A triangle located in front of the central pixel");
-
-        // TC01: A triangle located opposite the central pixel and the central upper pixel (2 points)
-        tr = new Triangle(new Point(0, 20, -2), new Point(1, -1, -2), new Point(-1, -1, -2));
-        assertEquals(countIntersections(cam, tr), 2, "Wrong Integration - Sphere at front of the view plane Integration - A triangle located opposite the central pixel and the central upper pixel");
-
-    }
-
-
-    /**
-     * The function receives a {@link Camera} and {@link Intersectable} and count
-     * the Intersections of rays that coming out of the camera with the shape.
-     *
-     * @param cam   Camera with view plane.
-     * @param shape Intersectable shape.
-     * @return number of intersections.
-     */
-    private int countIntersections(Camera cam, Intersectable shape) {
-        int count = 0;
-
-        for (int i = 0; i < 3; i++)
-            for (int j = 0; j < 3; j++) {
-                List<Point> intsPoints = shape.findIntersections(cam.constructRay(3, 3, j, i));
-                if (intsPoints != null)
-                    count += intsPoints.size();
+    List<Ray> createRays(int Nx, int Ny)
+    {
+        List<Ray> ray = new LinkedList<>();
+        for(int i = 0; i< Nx; i++)
+        {
+            for(int j = 0; j< Ny; j++)
+            {
+                ray.add(camera.constructRay(Nx, Ny, i, j));
             }
+        }
+        return ray;
+    }
 
-        return count;
+    int sumIntersections(List<Ray> rays,Geometries geometries )
+    {
+        int sum = 0;
+        for (var ray: rays)
+        {
+            var cnt = geometries.findIntersections(ray);
+            sum += cnt!= null ? cnt.size() : 0;
+        }
+        return sum;
+    }
+
+    @Test
+    void testIntegrationIntersections()
+    {
+        // tests for the sphere
+        camera.setP0(new Point(0, 0, 0.5));
+        List<Ray> rays=createRays(3,3);
+
+        //2 points of intersection with sphere
+        Geometries grSphere1=new Geometries(new Sphere(1,new Point(0, 0, -3)));
+        assertEquals(2,sumIntersections(rays,grSphere1),"test failed for smaller shape with 2 intersections");
+
+
+        // 18 points of intersection with sphere
+
+        //checks for 2 intersections for every ray
+        Geometries grSphere2=new Geometries(new Sphere(2.5,new Point(0, 0, -2.5)));
+        assertEquals(18,sumIntersections(rays,grSphere2),"test failed for shape with 2 intersections per ray");
+
+        // 10 points of intersection with sphere
+        //checks for intersection for the 5 inner rays 2 intersections
+        Geometries grSphere3=new Geometries(new Sphere(2,new Point(0, 0, -2)));
+        assertEquals(10,sumIntersections(rays,grSphere3),"test failed for shape with 2 interections for the 5 inner rays");
+
+        // 6 intersection points from within the sphere
+        Geometries grSphere4=new Geometries(new Sphere(4,new Point(0, 0, 0)));
+        assertEquals(9,sumIntersections(rays,grSphere4),"test failed for points within in the sphere");
+
+        // 0 intersections, sphere is behind
+        Geometries grSphere5=new Geometries(new Sphere(0.5,new Point(0, 0, 2)));
+        assertEquals(0,sumIntersections(rays,grSphere5),"test failed for sphere behind viewPlane");
+
+
+        // tests for triangle
+
+        //2 intersection points
+        Geometries grTriangle1= new Geometries(new Triangle(new Point(0,20,-2),new Point(-1,-1,-2), new Point(1,-1,-2)));
+        assertEquals(2,sumIntersections(rays,grTriangle1), "test failed for 2 intersections with triangle");
+
+        //1 intersection point
+        Geometries grTriangle2= new Geometries(new Triangle(new Point(0,1,-2),new Point(-1,-1,-2), new Point(1,-1,-2)));
+        assertEquals(1,sumIntersections(rays,grTriangle2), "test failed for 1 intersection with triangle");
+
+        //test for plane
+        // 9 intersection points with plae fully facing the viewPlane
+        Geometries grPlane1=new Geometries(new Plane(new Point(0,0,-8),new Vector(0,0,1)));
+        assertEquals(9,sumIntersections(rays,grPlane1), "test failed for 9 intersections with plane");
+
+        //9 intersection with plane slided diagonal
+        Geometries grPlane2=new Geometries(new Plane(new Point(0,0,-8),new Vector(0,-1,1)));
+        assertEquals(6,sumIntersections(rays,grPlane2), "test failed for 9 intersections with plane");
+
+        // 6 intersection with plane
+        Geometries grPlane3=new Geometries(new Plane(new Point(0,0,-8),new Vector(0,-0.5,1)));
+        assertEquals(9,sumIntersections(rays,grPlane3), "test failed for 9 intersections with plane");
+
     }
 }
