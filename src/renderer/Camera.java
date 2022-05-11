@@ -1,6 +1,8 @@
 package renderer;
 
 import java.util.MissingResourceException;
+
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 import primitives.*;
 import primitives.Vector;
@@ -108,31 +110,69 @@ public class Camera {
     }
 
     /**
-     * This function renders image's pixel color map from the scene included with
-     * the Renderer object
+     * Method for creating rays and for every ray gets the color for the pixel
      */
-    public Camera renderImage() {
-        try {
-            if (imageWriter == null)
-                throw new MissingResourceException("imageWriter field is empty", "ImageWriter", "imageWriter");
-            if (rayTracerBase == null)
-                throw new MissingResourceException("rayTracerBase field is empty", "RayTracerBase", "RayTracerBase");
+    public void renderImage() {
+        // In case that not all of the fields are filled
+        if (imageWriter == null || rayTracerBase == null)
+            throw new MissingResourceException("Missing", "resource", "exception");
 
-            int nX = imageWriter.getNx();
-            int nY = imageWriter.getNy();
-            for (int i = 0; i < nY; i++) {
-                for (int j = 0; j < nX; j++) {
-                    Ray ray = constructRay(nX, nY, j, i);
-                    Color pixelColor = rayTracerBase.traceRay(ray);
-                    imageWriter.writePixel(j, i, pixelColor);
-                }
+        // The nested loop finds and creates a ray for each pixels, finds its color and
+        // writes it to the image pixles
+        int nY = this.imageWriter.getNy();
+        int nX = this.imageWriter.getNx();
+
+        for (int i = 0; i < nX; i++) {
+            for (int j = 0; j < nY; j++) {
+                imageWriter.writePixel(j, i, castRay(nX, nY, j, i)); // Traces the color of the ray and writes it to the image
             }
-
-        } catch (MissingResourceException e) {
-            throw new UnsupportedOperationException("Not implemented yet" + e.getClassName());
         }
-        return this;
     }
+
+    /**
+     * The function calculates the ray that hits the pixel and returns the color
+     * @return Color
+     */
+    private Color castRay(int nX, int nY, int j, int i){
+        return rayTracerBase.traceRay(constructRayThroughPixel(nX, nY, j, i));
+    }
+
+    /**
+     * Calculates the ray that goes through the middle of a pixel i,j on the view
+     * plane
+     *
+     * @param nX
+     * @param nY
+     * @param j
+     * @param i
+     * @return The ray that goes through the middle of a pixel i,j on the view plane
+     */
+    public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
+        // Image center:
+        Point pC = p0.add(vTo.scale(this.distance));
+
+        // Ratio:
+        double Ry = height / nY;
+        double Rx = width / nX;
+
+        // Pixel[i,j] center
+        double yi = alignZero(-(i - (nY - 1) / 2.0) * Ry);
+        double xj = alignZero((j - (nX - 1) / 2.0) * Rx);
+
+        Point pIJ = pC;
+
+        // To avoid a zero vector exception
+        if (xj != 0)
+            pIJ = pIJ.add(vRight.scale(xj));
+        if (yi != 0)
+            pIJ = pIJ.add(vUp.scale(yi));
+
+        Vector vIJ = pIJ.subtract(this.p0);
+
+        return new Ray(p0, vIJ);
+    }
+
+
 
     /**
      * The function sends the image writer lines (boundaries) in color and spacing

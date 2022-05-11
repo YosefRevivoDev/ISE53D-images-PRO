@@ -65,7 +65,7 @@ public class Sphere extends Geometry{
         double t1 = alignZero(tm - th); // from p0 to p1
         double t2 = alignZero(tm + th);// from p0 to p2
 
-        if (t1 > 0 && t2 > 0) // take only t > 0 (going in the right direction)
+        if (t1 > 0 && t2 > 0 && alignZero(t1-maxDistance)<= 0 && alignZero(t2-maxDistance)<= 0) // take only t > 0 (going in the right direction)
         {
 //            Point P1 = P0.add(v.scale(t1));
 //            Point P2 = P0.add(v.scale(t2));
