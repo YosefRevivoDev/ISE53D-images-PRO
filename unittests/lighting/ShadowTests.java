@@ -32,13 +32,13 @@ public class ShadowTests {
      * Helper function for the tests in this module
      */
     void sphereTriangleHelper(String pictName, Triangle triangle, Point spotLocation) {
-        scene.geometries.add(sphere, triangle.setEmission(new Color(BLUE)).setMaterial(trMaterial));
-        scene.lights.add( //
+        scene.getGeometries().add(sphere, triangle.setEmission(new Color(BLUE)).setMaterial(trMaterial));
+        scene.getLights().add( //
                 new SpotLight(new Color(400, 240, 0), spotLocation, new Vector(1, 1, -3)) //
                         .setkL(1E-5).setkQ(1.5E-7));
         camera.setImageWriter(new ImageWriter(pictName, 400, 400)) //
-                .renderImage(); //
-                camera.writeToImage();
+                .renderImage() //
+                .writeToImage();
     }
 
     /**
@@ -97,9 +97,9 @@ public class ShadowTests {
      */
     @Test
     public void trianglesSphere() {
-        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), new Double3(.15)));
+        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE),  new Double3(0.15)));
 
-        scene.geometries.add( //
+        scene.getGeometries().add( //
                 new Triangle(new Point(-150, -150, -115), new Point(150, -150, -135), new Point(75, 75, -150)) //
                         .setMaterial(new Material().setkS(0.8).setnShininess(60)), //
                 new Triangle(new Point(-150, -150, -115), new Point(-70, 70, -140), new Point(75, 75, -150)) //
@@ -108,13 +108,13 @@ public class ShadowTests {
                         .setEmission(new Color(java.awt.Color.BLUE)) //
                         .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(30)) //
         );
-        scene.lights.add( //
+        scene.getLights().add( //
                 new SpotLight(new Color(700, 400, 400), new Point(40, 40, 115), new Vector(-1, -1, -4)) //
                         .setkL(4E-4).setkQ(2E-5));
 
         camera.setImageWriter(new ImageWriter("shadowTrianglesSphere", 600, 600)) //
-                .renderImage(); //
-                camera.writeToImage();
+                .renderImage() //
+                .writeToImage();
     }
 
 }

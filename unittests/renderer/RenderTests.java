@@ -22,10 +22,10 @@ public class RenderTests {
      */
     @Test
     public void basicRenderTwoColorTest() {
-        Scene scene = new Scene("Test scene")//
+        Scene scene = new Scene.SceneBuilder("Test scene")
                 .setAmbientLight(new AmbientLight(new Color(255, 191, 191), //
                         new Double3(1, 1, 1))) //
-                .setBackground(new Color(75, 127, 90));
+                .setBackground(new Color(75, 127, 90)).build();
 
         scene.getGeometries().add(
                 new Sphere(50, new Point(0, 0, -100)),
@@ -54,8 +54,8 @@ public class RenderTests {
      */
     @Test
     public void basicRenderMultiColorTest() {
-        Scene scene = new Scene("Test scene")//
-                .setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.2))); //
+        Scene scene = new Scene.SceneBuilder("Test scene")//
+                .setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.2))).build(); //
 
         scene.getGeometries().add( //
                 (Intersectable) new Sphere(50, new Point(0, 0, -100)),
