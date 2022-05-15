@@ -40,8 +40,8 @@ public class Ray {
      */
     public Ray(Vector vecDir, Point p , Vector n) {
         dir = vecDir.normalize();
-        Vector delta = n.scale(alignZero(n.dotProduct(dir) < 0 ? DELTA : -DELTA));
-        this._p0 = p.add(delta);
+        Vector delta = n.scale(alignZero(n.dotProduct(dir) > 0 ? DELTA : -DELTA));
+        _p0 = p.add(delta);
     }
 
     public Point getPoint() { return (_p0);}
