@@ -1,15 +1,17 @@
 package lighting;
 
 import primitives.Color;
+import primitives.Double3;
 import primitives.Point;
 import primitives.Vector;
 
 public class PointLight extends Light implements LightSource {
 
     private final Point position;
-    private double kC = 1;
-    private double kL = 0;
-    private double kQ = 0;
+    private Double3 kC = Double3.ONE;
+    private Double3 kL = Double3.ZERO;
+    private Double3 kQ = Double3.ZERO;
+
 
     public PointLight(Color intensity, Point _position) {
         super(intensity);
@@ -17,17 +19,17 @@ public class PointLight extends Light implements LightSource {
     }
 
     public PointLight setkC(double kC) {
-        this.kC = kC;
+        this.kC = new Double3(kC);
         return this;
     }
 
     public PointLight setkL(double kL) {
-        this.kL = kL;
+        this.kL = new Double3(kL);
         return this;
     }
 
     public PointLight setkQ(double kQ) {
-        this.kQ = kQ;
+        this.kQ = new Double3(kQ);
         return this;
     }
 
@@ -36,16 +38,21 @@ public class PointLight extends Light implements LightSource {
         return super.getIntensity();
     }
 
-    protected double intensityHelp(Point p) {
-        double ds = p.distanceSquared(position);
-        double d = p.distance(position);
-        return (kC + d * kL + ds * kQ);
-    }
+    //protected double intensityHelp(Point p) {
+    //   double ds = p.distanceSquared(position);
+     //   double d = p.distance(position);
+     //   return (kC + d * kL + ds * kQ);
+   // }
 
     public Color getIntensity(Point p) {
-        // but kL and Kq are 0
-        double denominator = intensityHelp(p);
-        return super.getIntensity().reduce(denominator);
+
+        Color lightIntensity = getIntensity();
+
+        double ds = p.distanceSquared(position);
+        double d = p.distance(position);
+        Double3 denominator = kC.add(kL.scale(d)).add( kQ.scale(ds));
+
+        return lightIntensity.reduce(denominator);
     }
 
     @Override
@@ -55,6 +62,6 @@ public class PointLight extends Light implements LightSource {
 
     @Override
     public double getDistance(Point p) {
-        return Double.POSITIVE_INFINITY;
+        return position.distance(p);
     }
 }

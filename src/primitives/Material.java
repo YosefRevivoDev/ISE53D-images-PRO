@@ -22,7 +22,7 @@ public class Material
     }
 
     public Material setkD(double kD) {
-
+        this.kD = new Double3(kD);
         return this;
     }
     /**
@@ -36,9 +36,55 @@ public class Material
     }
 
     public Material setkS(double kS) {
-
+        this.kS = new Double3(kS);
         return this;
     }
+
+    /**
+     * setter according to the builder pattern
+     *
+     * @param kT
+     * @return
+     */
+    public Material setKt(Double3 kt) {
+        this.kT = kt;
+        return this;
+    }
+
+    /**
+     * setter according to the builder pattern
+     *
+     * @param kt
+     * @return
+     */
+    public Material setKt(Double kt) {
+        kT = new Double3(kt);
+        return this;
+    }
+
+    /**
+     * setter according to the builder pattern
+     *
+     * @param kr
+     * @return
+     */
+    public Material setKr(Double3 kr) {
+        kR = kr;
+        return this;
+    }
+
+    /**
+     * setter according to the builder pattern
+     *
+     * @param kr
+     * @return
+     */
+    public Material setKr(Double kr) {
+        kR = new Double3(kr);
+        return this;
+    }
+
+
     /**
      * setter according to the builder pattern
      * @param nShininess
