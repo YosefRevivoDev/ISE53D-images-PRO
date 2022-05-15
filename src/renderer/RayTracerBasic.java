@@ -15,7 +15,7 @@ import static primitives.Util.alignZero;
 public class RayTracerBasic extends RayTracerBase {
 
     private static final double DELTA = 0.1;
-    public static final Double3 INITIAL_K = Double3.ONE;
+    private static final double INITIAL_K = 1.0;
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     private static final double MIN_CALC_COLOR_K = 0.001;
 
@@ -43,7 +43,7 @@ public class RayTracerBasic extends RayTracerBase {
     public Color traceRay(Ray ray) {
         GeoPoint interPoint = findClosestIntersection(ray);
         if (interPoint == null) {
-            return scene.getBackground();
+            return scene.background;
         }
         return calcColor(interPoint, ray);
     }
@@ -69,7 +69,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @return
      */
     public Color calcColor(GeoPoint point, Ray ray) {
-        return calcColor(point, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K).add(scene.ambientLight.getIntensity());
+        return calcColor(point, ray, MAX_CALC_COLOR_LEVEL, new Double3(INITIAL_K)).add(scene.ambientLight.getIntensity());
     }
 
     /**
@@ -169,11 +169,11 @@ public class RayTracerBasic extends RayTracerBase {
      * Calculate the reflection ray
      * @param n
      * @param point
-     * @param inRay
+     * @param ray
      * @return The new ray after the reflection calculate
      */
-    private Ray constructReflectedRay(Vector n, Point point, Ray inRay) {
-        Vector v = inRay.getDir();
+    private Ray constructReflectedRay(Vector n, Point point, Ray ray) {
+        Vector v = ray.getDir();
         Vector r = v.subtract(n.scale(alignZero(2 * (n.dotProduct(v)))));
         return new Ray(r.normalize(), point, n);
     }
@@ -245,8 +245,8 @@ public class RayTracerBasic extends RayTracerBase {
             return true;
 
         double lightDistance = light.getDistance(gp._point);
-        for (GeoPoint geop : intersections) {
-            if (alignZero(geop._point.distance(gp._point) - lightDistance) <= 0)
+        for (GeoPoint geopoint : intersections) {
+            if (alignZero(geopoint._point.distance(gp._point) - lightDistance) <= 0)
                 if(gp._geometry.getMaterial().kT.equals(Double3.ZERO))
                     return false;
         }
