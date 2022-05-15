@@ -218,7 +218,6 @@ public class RayTracerBasic extends RayTracerBase {
         return lightIntensity.scale(ks.scale(vr));
     }
 
-
     /**
      * Checks if there is no shade between a point and a light source
      *
