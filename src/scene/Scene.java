@@ -2,19 +2,19 @@ package scene;
 
 import geometries.Geometries;
 import lighting.*;
-import lighting.AmbientLight;
 import primitives.Color;
+
 import java.util.LinkedList;
 import java.util.List;
 
 
 public class Scene {
 
-    public String name;
-    public Color background = Color.BLACK;
-    public AmbientLight ambientLight;
-    public Geometries geometries;
-    public List<LightSource> lights = new LinkedList<>();
+    private  String name;
+    private  Color background;
+    private AmbientLight ambientLight;
+    private  Geometries geometries;
+    private  List<LightSource> lights;
 
 
     /**
@@ -55,34 +55,9 @@ public class Scene {
         return lights;
     }
 
-    /**
-     * Builder pattern Setter
-     * @param background the background to set
-     */
-    public Scene setBackground(Color background) {
-        this.background = background;
-        return this;
-    }
-
-    /**
-     * Builder pattern Setter
-     * @param ambientLight the ambientLight to set
-     */
-    public Scene setAmbientLight(AmbientLight ambientLight) {
+    public void setAmbientLight(AmbientLight ambientLight) {
         this.ambientLight = ambientLight;
-        return this;
     }
-
-    /**
-     * Builder pattern Setter
-     * @param geometries the geometries to set
-     */
-    public Scene setGeometries(Geometries geometries) {
-        this.geometries = geometries;
-        return this;
-    }
-
-
 
     public static class SceneBuilder {
         private final String name;

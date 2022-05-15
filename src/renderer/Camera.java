@@ -112,21 +112,31 @@ public class Camera {
     /**
      * Method for creating rays and for every ray gets the color for the pixel
      */
-    public void renderImage() {
-        // In case that not all of the fields are filled
-        if (imageWriter == null || rayTracerBase == null)
-            throw new MissingResourceException("Missing", "resource", "exception");
+    public Camera renderImage() {
 
+        try {
+            if (imageWriter == null) {
+                throw new MissingResourceException("missing resource", ImageWriter.class.getName(), "");
+            }
+            if (rayTracerBase == null) {
+                throw new MissingResourceException("missing resource", RayTracerBase.class.getName(), "");
+            }
         // The nested loop finds and creates a ray for each pixels, finds its color and
         // writes it to the image pixles
-        int nY = this.imageWriter.getNy();
-        int nX = this.imageWriter.getNx();
-
-        for (int i = 0; i < nX; i++) {
-            for (int j = 0; j < nY; j++) {
-                imageWriter.writePixel(j, i, castRay(nX, nY, j, i)); // Traces the color of the ray and writes it to the image
+            //rendering the image
+            int nX = imageWriter.getNx();
+            int nY = imageWriter.getNy();
+            for (int i = 0; i < nY; i++) {
+                for (int j = 0; j < nX; j++) {
+                    Ray ray = constructRay(nX, nY, j, i);
+                    Color pixelColor = rayTracerBase.traceRay(ray);
+                    imageWriter.writePixel(j, i, pixelColor);
+                }
             }
+        } catch (MissingResourceException e) {
+            throw new UnsupportedOperationException("Not implemented yet" + e.getClassName());
         }
+        return this;
     }
 
     /**
