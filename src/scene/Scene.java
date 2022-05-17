@@ -12,7 +12,7 @@ public class Scene {
 
     private  String name;
     private  Color background;
-    private AmbientLight ambientLight;
+    private  AmbientLight ambientLight;
     private  Geometries geometries;
     private  List<LightSource> lights;
 

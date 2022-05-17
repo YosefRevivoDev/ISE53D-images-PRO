@@ -141,9 +141,9 @@ public class ReflectionRefractionTests {
                         .add(new Vector(30,-10,5))).setEmission(new Color(RED)) //
                         .setMaterial(new Material().setkD(0.2).setkS(0.2).setnShininess(30).setKt(0.2)),
                 new Tube(10d, new Ray(new Point(-60,-50,50), new Vector(0,1,-8))).setEmission(new Color(GREEN)) //
-                         .setMaterial(new Material().setkD(0.8).setkS(0.8).setnShininess(30).setKt(0.6)),
+                         .setMaterial(new Material().setkD(0.8).setkS(0.8).setnShininess(30).setKt(0.9999999999999999)),
                 new Cylinder(10d,new Ray(new Point(-50,100,50),new Vector(0,-1,-3)),0.1).setEmission(new Color(YELLOW))
-                        .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(10)));
+                        .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(10).setkD(0.9999999999999)));
 
         ImageWriter imageWriter = new ImageWriter("another test", 600, 600);
         camera.setImageWriter(imageWriter) //
