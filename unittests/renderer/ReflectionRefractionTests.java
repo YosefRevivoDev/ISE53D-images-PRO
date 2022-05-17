@@ -105,7 +105,47 @@ public class ReflectionRefractionTests {
         scene.getLights().add(new SpotLight(new Color(700, 400, 400), new Point(60, 50, 0), new Vector(0, 0, -1)) //
                 .setkL(4E-5).setkQ(2E-7));
 
+
         ImageWriter imageWriter = new ImageWriter("refractionShadow", 600, 600);
+        camera.setImageWriter(imageWriter) //
+                .setRayTracerBase(new RayTracerBasic(scene)) //
+                .renderImage() //
+                .writeToImage();
+    }
+
+    /**
+     * Produce a picture of a two triangles lighted by a spot light with a partially
+     * transparent Sphere producing partial shadow
+     */
+    @Test
+    public void anotherPictureTest() {
+        Camera camera = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+                .setVPSize(200, 200).setVPDistance(1000);
+
+        Scene scene = new Scene.SceneBuilder("Test scene").
+                setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15))).build();
+
+        scene.getLights().add(new SpotLight(new Color(700, 400, 400), new Point(60, 50, 0), new Vector(0, 0, -1)) //
+                .setkL(4E-5).setkQ(2E-7));
+        scene.getLights().add(new SpotLight(new Color(300, 400, 400), new Point(-10, -10, 0), new Vector(-1, 2, -1)) //
+                .setkL(4E-5).setkQ(2E-3));
+
+        scene.getGeometries().add( //
+                new Triangle(new Point(-150, -150, -115), new Point(150, -150, -135), new Point(75, 75, -150)) //
+                        .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(60)), //
+                new Triangle(new Point(-150, -150, -115), new Point(-70, 70, -140), new Point(75, 75, -150)) //
+                        .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(60)), //
+                new Sphere(30d, new Point(40, 50, -50)).setEmission(new Color(BLUE)) //
+                        .setMaterial(new Material().setkD(0.2).setkS(0.2).setnShininess(30).setKt(0.6)),
+                new Triangle(new Point(-50, -50, -15), new Point(50, -50, -35), new Point(25, 25, -50)
+                        .add(new Vector(30,-10,5))).setEmission(new Color(RED)) //
+                        .setMaterial(new Material().setkD(0.2).setkS(0.2).setnShininess(30).setKt(0.2)),
+                new Tube(10d, new Ray(new Point(-60,-50,50), new Vector(0,1,-8))).setEmission(new Color(GREEN)) //
+                         .setMaterial(new Material().setkD(0.8).setkS(0.8).setnShininess(30).setKt(0.6)),
+                new Cylinder(10d,new Ray(new Point(-50,100,50),new Vector(0,-1,-3)),0.1).setEmission(new Color(YELLOW))
+                        .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(10)));
+
+        ImageWriter imageWriter = new ImageWriter("another test", 600, 600);
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
                 .renderImage() //
