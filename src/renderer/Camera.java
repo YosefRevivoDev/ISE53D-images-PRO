@@ -1,5 +1,7 @@
 package renderer;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.MissingResourceException;
 
 import static primitives.Util.alignZero;
@@ -37,7 +39,6 @@ public class Camera {
         this.vRight = vTo.crossProduct(vUp).normalize();
 
     }
-
 
     public void setP0(Point p0) {
         this.p0 = p0;
@@ -150,7 +151,6 @@ public class Camera {
     /**
      * Calculates the ray that goes through the middle of a pixel i,j on the view
      * plane
-     *
      * @param nX
      * @param nY
      * @param j
@@ -182,7 +182,22 @@ public class Camera {
         return new Ray(p0, vIJ);
     }
 
+    public List<Ray> createBeamRay(int nX, int nY, double i, double j) {
 
+        double Rx = width/nX; //length width
+        double Ry = height/nY;//length height
+
+        double yi = ((i - nY / 2d) * (Ry + Ry) / 2d);
+        double xj = ((j - nX / 2d) * (Rx + Rx) / 2d);
+
+        Point pCenter = (p0.add(vTo.scale(distance)));
+        Point checkP = pCenter.add(vRight.scale(xj).subtract(vUp.scale(yi)));
+
+        var rays = new LinkedList<Ray>();
+
+        rays.add(new Ray(checkP,p0.subtract(checkP)));// add main ray
+        return rays;
+    }
 
     /**
      * The function sends the image writer lines (boundaries) in color and spacing
@@ -221,5 +236,9 @@ public class Camera {
     public Camera setRayTracerBase(RayTracerBase rayTracerBase) {
         this.rayTracerBase = rayTracerBase;
         return this;
+    }
+
+    public double getDistance(Point point) {
+        return p0.distance(point);
     }
 }

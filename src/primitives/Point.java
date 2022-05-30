@@ -22,6 +22,9 @@ public class Point {
         this.xyz = xyz;
     }
 
+    public Point(Point p){
+        xyz = p.xyz;
+    }
     /**
      * c'tor Gets three values from type double
      * @param d1
@@ -76,6 +79,20 @@ public class Point {
         return xyz.d1;
     }
 
+    public double getY() {
+        return xyz.d2;
+    }
+
+    public double getZ() {
+        return xyz.d3;
+    }
+    /**
+     * The function returns a copy of the points
+     * @return New point with the same coordinates of this point
+     */
+    public Point getCopy() {
+        return new Point(this.getX(), this.getY(), this.getZ());
+    }
     /**
      * Calculates the distance between two points squared
      *

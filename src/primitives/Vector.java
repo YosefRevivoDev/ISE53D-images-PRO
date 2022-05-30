@@ -14,6 +14,9 @@ public class Vector extends Point {
      */
     public Vector(double d1, double d2, double d3) {
         this(new Double3(d1, d2, d3));
+        if (this.equals(Point.ZERO))
+            throw new IllegalArgumentException("Invalid vector - (0,0,0)");
+        head = this;
     }
 
     /**
@@ -27,6 +30,7 @@ public class Vector extends Point {
         if (xyz.equals(Double3.ZERO)) {
             throw new IllegalArgumentException("Vector can not be the vector zero");
         }
+        this.head = new Point(xyz.d1,xyz.d2,xyz.d3);
     }
 
     @Override
@@ -36,6 +40,23 @@ public class Vector extends Point {
         if (!(obj instanceof Vector)) return false;
         return super.equals(obj);
     }
+
+    private Point head;
+
+
+    /**
+     * The function calculates an orthogonal vector to "this"
+     *
+     * @return an orthogonal vector to "this" vector
+     */
+    public Vector getOrthogonal() {
+        try {
+            return new Vector(head.getZ(), 0, -head.getX()).normalize();
+        } catch (IllegalArgumentException ex) {
+            return new Vector(head.getY(), -head.getX(), 0).normalize();
+        }
+    }
+
 
     /**
      * Vector insert function
@@ -112,5 +133,21 @@ public class Vector extends Point {
         if(len == 0)
             throw new ArithmeticException("Divide by zero!");
         return new Vector(xyz.reduce((len)));
+    }
+
+
+
+    /**
+     * Getter
+     *
+     * @return head
+     */
+    public Point getHead() {
+        return head;
+    }
+
+    @Override
+    public String toString() {
+        return "Vector [head=" + head + "]";
     }
 }
