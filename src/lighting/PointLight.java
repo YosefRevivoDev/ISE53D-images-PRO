@@ -66,17 +66,17 @@ public class PointLight extends Light implements LightSource, SourceArea {
     }
 
 
-//    @Override
-//    public Color getIntensity() {
-//        return super.getIntensity();
+    @Override
+    public Color getIntensity() {
+        return super.getIntensity();
+    }
+
+
+//    protected double intensityHelp(Point p) {
+//       double ds = p.distanceSquared(position);
+//        double d = p.distance(position);
+//        return (kC.add(d).product(kL.add(ds).product(kQ)));
 //    }
-
-
-    //protected double intensityHelp(Point p) {
-    //   double ds = p.distanceSquared(position);
-     //   double d = p.distance(position);
-     //   return (kC + d * kL + ds * kQ);
-   // }
 
     public Color getIntensity(Point p) {
 

@@ -11,16 +11,16 @@ public class SpotLight extends PointLight implements LightSource {
 
     final Vector direction;
 
-    /**
-     *
-     * @param intensity
-     * @param position
-     * @param direction
-     */
-    public SpotLight(Color intensity, Point position, Vector direction) {
-        super(intensity, position);
-        this.direction = direction.normalize();
-    }
+//    /**
+//     *
+//     * @param intensity
+//     * @param position
+//     * @param direction
+//     */
+//    public SpotLight(Color intensity, Point position, Vector direction) {
+//        super(intensity, position);
+//        this.direction = direction.normalize();
+//    }
 
     /**
      * Constructor of Spotlight which receives four params
