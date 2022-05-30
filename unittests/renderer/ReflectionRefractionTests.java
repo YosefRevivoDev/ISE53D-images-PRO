@@ -274,7 +274,7 @@ public class ReflectionRefractionTests {
 
         scene.getLights().add(new SpotLight(new Color(400, 300, 400), new Point(-25, 25, -25)
                 , new Vector(1, -1, 1),0.15) //
-                .setkL(4E-5).setkQ(2E-6).setRadius(4).setBeamsNum(150));
+                .setkL(4E-5).setkQ(2E-6).setRadius(3).setBeamsNum(150));
 
         ImageWriter imageWriter = new ImageWriter("SoftShading2", 600, 600);
         camera.setImageWriter(imageWriter)
