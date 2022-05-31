@@ -2,6 +2,8 @@ package primitives;
 
 import geometries.Intersectable;
 import geometries.Intersectable.GeoPoint;
+import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities;
+import renderer.Camera;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +20,6 @@ public class Ray {
 
     private Point _p0;
     private Vector dir;
-
     private static final double DELTA = 0.1;
 
     /**
@@ -56,13 +57,6 @@ public class Ray {
 
     public Vector getDir() { return dir;}
 
-    /**
-     * @param length
-     * @return new Point
-     */
-    public Point getTargetPoint(double length) {
-        return isZero(length ) ? _p0 : _p0.add(dir.scale(length));
-    }
 
     public Point findClosestPoint(List<Point> points) {
         return points == null || points.isEmpty() ? null
@@ -84,6 +78,15 @@ public class Ray {
         }
         return closestPoint;
     }
+
+    /**
+     * @param length
+     * @return new Point
+     */
+    public Point getTargetPoint(double length) {
+        return isZero(length ) ? _p0 : _p0.add(dir.scale(length));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

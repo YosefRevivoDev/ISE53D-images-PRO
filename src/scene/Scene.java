@@ -11,10 +11,10 @@ import java.util.List;
 public class Scene {
 
     private  String name;
-    private  Color background;
-    private  AmbientLight ambientLight;
-    private  Geometries geometries;
-    private  List<LightSource> lights;
+    private  Color background = Color.BLACK;
+    private  AmbientLight ambientLight = new AmbientLight();
+    private  Geometries geometries = new Geometries();
+    private  List<LightSource> lights = new LinkedList<>();
 
 
     /**

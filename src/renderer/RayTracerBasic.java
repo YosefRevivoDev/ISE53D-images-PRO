@@ -4,6 +4,7 @@ package renderer;
 import geometries.Intersectable.*;
 import geometries.*;
 import lighting.LightSource;
+import lighting.SourceArea;
 import primitives.*;
 import scene.Scene;
 import geometries.Intersectable.GeoPoint;
@@ -105,11 +106,21 @@ public class RayTracerBasic extends RayTracerBase {
         for (LightSource lightSource : scene.getLights()) {
             Vector l = lightSource.getL(intersection._point);
             double nl = alignZero(n.dotProduct(l));
-            if (nl * nv > 0) { // checks if sign(nl) == sing(nv)
+
+            List<Vector> ls;
+
+            // Create or get a creation of shadow rays
+            if (lightSource instanceof SourceArea) {
+                ls = ((SourceArea) lightSource).getLs(intersection._point);
+            } else
+                ls = List.of(lightSource.getL(intersection._point));
+
+            Double3 ktr = transparency(lightSource, ls, n, nv, intersection);
+
                 //if (unshaded(lightSource, l, n, intersection))
-                Double3 ktr = transparency(lightSource, l, n, intersection);
                 if (!k.product(ktr).lowerThan(MIN_CALC_COLOR_K)) {
                     Color lightIntensity = lightSource.getIntensity(intersection._point).scale(ktr);
+                    if (nl * nv > 0) { // checks if sign(nl) == sing(nv)
                     color = color.add(calcDiffusive(kd, l, n, lightIntensity),
                             calcSpecular(ks, l, n, v, nShininess, lightIntensity));
                 }
@@ -190,9 +201,6 @@ public class RayTracerBasic extends RayTracerBase {
         return new Ray(ray.getDir(), point, n);
     }
 
-
-
-
     /**
      * Calculates diffusive light
      * @param kd
@@ -230,7 +238,6 @@ public class RayTracerBasic extends RayTracerBase {
 
     /**
      * Checks if there is no shade between a point and a light source
-     *
      * @param l
      * @param n
      * @param gp
@@ -254,33 +261,38 @@ public class RayTracerBasic extends RayTracerBase {
         return true; //in case all intersections are in between lightDistance and gp.
     }
 
-
     /**
      * Checks if there is no shade between a point and a light source
      * @param ls
-     * @param l
+     * @param lList
      * @param n
+     * @param nv
      * @param geoPoint
      * @return Double value if the transparency check was successful
      */
-    private Double3 transparency(LightSource ls, Vector l, Vector n, GeoPoint geoPoint) {
-        Vector lightDirection = l.scale(-1); // from point to light source
+    private Double3 transparency(LightSource ls,List<Vector> lList, Vector n, double nv, GeoPoint geoPoint) {
 
-        Ray lightRay = new Ray(lightDirection, geoPoint._point, n);
+        Double3 sum = Double3.ZERO;
+        Material material = geoPoint._geometry.getMaterial();
+        for (Vector l : lList) {
 
-        List<GeoPoint> intersections = scene.getGeometries().findGeoIntersections(lightRay);
-        if (intersections == null)
-            return new Double3(1.0);
+            double nl = Util.alignZero(n.dotProduct(l));
+            Double3 ktr = Double3.ONE;
+            if (nl * nv <= 0) // sign(nl) != sing(nv)
+                ktr =ktr.product(material.kT);
 
-        double lightDistance = ls.getDistance(geoPoint._point);
-        Double3 ktr = new Double3(1.0);
-        for (GeoPoint geop : intersections) {
-            if (alignZero(geop._point.distance(geoPoint._point) - lightDistance) <= 0) {
-                ktr = ktr.product(geop._geometry.getMaterial().kT);
-                if (ktr.lowerThan(MIN_CALC_COLOR_K))
-                    return Double3.ZERO;
-            }
+            Vector lightDirection = l.scale(-1); // from point to light source
+            Ray lightRay = new Ray(lightDirection,geoPoint._point, n);
+            List<GeoPoint> intersections = scene.getGeometries().findGeoIntersections(lightRay,
+                    ls.getDistance(geoPoint._point));
+            if (intersections != null)
+                for (GeoPoint gp : intersections) {
+                    ktr = gp._geometry.getMaterial().kT;
+                    if (ktr.lowerThan(MIN_CALC_COLOR_K))
+                        ktr = Double3.ZERO;
+                }
+            sum = sum.add(ktr);
         }
-        return ktr;
+        return sum.reduce(lList.size());
     }
 }
