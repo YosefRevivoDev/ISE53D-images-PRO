@@ -18,6 +18,7 @@ public class Camera {
 
     private ImageWriter imageWriter;
     private RayTracerBase rayTracerBase;
+    private int amountOfRaysFound = 0;
 
     /**
      * Camera constructor receiving three {@link Vector}.
@@ -71,6 +72,14 @@ public class Camera {
      */
     public Camera setVPDistance(double distance) {
         this.distance = distance;
+        return this;
+    }
+
+    /**
+     * @param amountOfRaysFound the amountOfSampledRays to set
+     */
+    public Camera setAmountOfRaysFound(int amountOfRaysFound) {
+        this.amountOfRaysFound = amountOfRaysFound;
         return this;
     }
 
