@@ -2,12 +2,12 @@ package geometries;
 
 import primitives.*;
 import primitives.Ray;
-import java.util.stream.Collectors;
+
 import java.util.Objects;
 
 import java.util.*;
 
-public abstract class Intersectable {
+public abstract class Intersect {
 
     /**
      * returns list of intersections between ray and the intersectable
@@ -76,4 +76,4 @@ public abstract class Intersectable {
     public String toString() {
         return "Intersectable{}";
     }
-}
+ }

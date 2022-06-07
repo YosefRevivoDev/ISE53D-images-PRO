@@ -1,13 +1,11 @@
 package renderer;
 
 
-import geometries.Intersectable.*;
-import geometries.*;
 import lighting.LightSource;
 import lighting.SourceArea;
 import primitives.*;
 import scene.Scene;
-import geometries.Intersectable.GeoPoint;
+import geometries.Intersect.GeoPoint;
 import static java.lang.Math.*;
 
 import java.util.List;

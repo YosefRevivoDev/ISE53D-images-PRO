@@ -1,27 +1,26 @@
 package geometries;
 
-import primitives.Point;
 import primitives.Ray;
 
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Geometries extends Intersectable {
+public class Geometries extends Intersect {
 
-    protected List<Intersectable> _intersectablesList;
+    protected List<Intersect> _intersectablesList;
 
     public Geometries() {
         _intersectablesList = new LinkedList<>();
     }
 
-    public Geometries(Intersectable... intersectables) {
+    public Geometries(Intersect... intersectables) {
         _intersectablesList = new LinkedList<>();
         Collections.addAll(_intersectablesList, intersectables);
 
     }
 
-    public void add(Intersectable... intersectables) {
+    public void add(Intersect... intersectables) {
         Collections.addAll(_intersectablesList, intersectables);
     }
 
@@ -33,7 +32,7 @@ public class Geometries extends Intersectable {
     @Override
     protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         List<GeoPoint> intersections = null;
-        for (Intersectable geometry : _intersectablesList) {
+        for (Intersect geometry : _intersectablesList) {
             var geoIntersections = geometry.findGeoIntersections(ray);
             if (geoIntersections != null) {
                 if (intersections == null) {

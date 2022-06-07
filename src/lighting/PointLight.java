@@ -30,6 +30,13 @@ public class PointLight extends Light implements LightSource, SourceArea {
         this.xAndY = 1;
     }
 
+    public PointLight() {
+        super();
+    }
+
+    public PointLight(Color scale, Point point, int i) {
+    }
+
     public PointLight setkC(double kC) {
         this.kC = new Double3(kC);
         return this;
