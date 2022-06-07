@@ -117,10 +117,10 @@ public class RayTracerBasic extends RayTracerBase {
 
             Double3 ktr = transparency(lightSource, ls, n, nv, intersection);
 
-                //if (unshaded(lightSource, l, n, intersection))
-                if (!k.product(ktr).lowerThan(MIN_CALC_COLOR_K)) {
-                    Color lightIntensity = lightSource.getIntensity(intersection._point).scale(ktr);
-                    if (nl * nv > 0) { // checks if sign(nl) == sing(nv)
+            //if (unshaded(lightSource, l, n, intersection))
+            if (!k.product(ktr).lowerThan(MIN_CALC_COLOR_K)) {
+                Color lightIntensity = lightSource.getIntensity(intersection._point).scale(ktr);
+                if (nl * nv > 0) { // checks if sign(nl) == sing(nv)
                     color = color.add(calcDiffusive(kd, l, n, lightIntensity),
                             calcSpecular(ks, l, n, v, nShininess, lightIntensity));
                 }

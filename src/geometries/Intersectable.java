@@ -76,4 +76,4 @@ public abstract class Intersectable {
     public String toString() {
         return "Intersectable{}";
     }
- }
+}

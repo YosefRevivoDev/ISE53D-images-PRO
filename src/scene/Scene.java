@@ -3,6 +3,7 @@ package scene;
 import geometries.Geometries;
 import lighting.*;
 import primitives.Color;
+import geometries.Intersectable;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,11 +11,11 @@ import java.util.List;
 
 public class Scene {
 
-    private  String name;
-    private  Color background = Color.BLACK;
-    private  AmbientLight ambientLight = new AmbientLight();
-    private  Geometries geometries = new Geometries();
-    private  List<LightSource> lights = new LinkedList<>();
+    public String name;
+    public Color background = Color.BLACK;
+    public AmbientLight ambientLight = new AmbientLight();
+    public Geometries geometries = new Geometries();
+    public List<LightSource> lights = new LinkedList<>();
 
 
     /**
