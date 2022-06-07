@@ -803,7 +803,7 @@ public class ReflectionRefractionTests {
                 .setkL(4E-5).setkQ(2E-7).setRadius(4).setBeamsNum(100));
 
 
-        ImageWriter imageWriter = new ImageWriter("final", 600, 600);
+        ImageWriter imageWriter = new ImageWriter("final", 600, 700);
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
                 .renderImage() //
