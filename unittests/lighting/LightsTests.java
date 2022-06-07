@@ -51,25 +51,26 @@ public class LightsTests {
 
     //הוספה
 
-//    private static Geometry triangle10 = new Triangle( //
-//            new Point(-150, -150, -150), new Point(150, -150, -150), new Point(75, 75, -150));
-//    private static Geometry triangle20 = new Triangle( //
-//            new Point(-150, -150, -150), new Point(-70, 70, -50), new Point(75, 75, -150));
-//    private static Geometry sphere0 = new Sphere(50, new Point(0, 0, -50))
-//            .setEmission(new Color(java.awt.Color.BLUE)) //
-//            .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(100));
-//
-//    private static Geometry sphere1 = new Sphere(100, new Point(0, 0, -100));
-//    private static Geometry sphere2 = new Sphere(50, new Point(100, 0, -100));
-//    private static Geometry sphere3 = new Sphere(50, new Point(-100, 0, -100));
-//
-//
-//    private static Geometry planeA = new Plane(new Point(500,0,0),
-//            new Vector(1,0,0));
-//    private static Geometry planeB = new Plane(new Point(-500,0,0),
-//            new Vector(1,0,0));
-//    private static Geometry planeC = new Plane(new Point(0,0,-20),
-//            new Vector(0,0,1));
+    private static Geometry triangle10 = new Triangle( //
+            new Point(-150, -150, -150), new Point(150, -150, -150), new Point(75, 75, -150));
+    private static Geometry triangle20 = new Triangle( //
+            new Point(-150, -150, -150), new Point(-70, 70, -50), new Point(75, 75, -150));
+    private static Geometry sphere0 = new Sphere(50, new Point(0, 0, -50))
+            .setEmission(new Color(java.awt.Color.BLUE)) //
+            .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(100));
+
+    private static Geometry sphere1 = new Sphere(100, new Point(0, 0, -100));
+    private static Geometry sphere2 = new Sphere(50, new Point(100, 0, -100));
+    private static Geometry sphere3 = new Sphere(50, new Point(-100, 0, -100));
+
+
+    private static Geometry planeA = new Plane(new Point(500,0,0),
+            new Vector(1,0,0));
+    private static Geometry planeB = new Plane(new Point(-500,0,0),
+            new Vector(1,0,0));
+    private static Geometry planeC = new Plane(new Point(0,0,-20),
+            new Vector(0,0,1));
+
     /**
      * Produce a picture of a sphere lighted by a directional light
      */
@@ -372,23 +373,23 @@ public class LightsTests {
                         .setMaterial(new Material().setkD(0.3).setkS(0.7).setnShininess(100).setKt(0.8)),
 
 //wallSpheres
-                new Sphere(4d, new Point(35, 30, 50))
-                        .setEmission(new Color(java.awt.Color.RED))
-                        .setMaterial(new Material().setkD(0.2).setkS(0.2).setnShininess(30).setKt(0.3)),
-                new Sphere(4d, new Point(35, 30, 75))
-                        .setEmission(new Color(java.awt.Color.ORANGE))
-                        .setMaterial(new Material().setkD(0.2).setkS(0.2).setnShininess(30).setKt(0.3)),
-                new Sphere(4d, new Point(35, 30, 100))
-                        .setEmission(new Color(java.awt.Color.GREEN))
-                        .setMaterial(new Material().setkD(0.2).setkS(0.2).setnShininess(30).setKt(0.3)));
+               new Sphere(4, new Point(35, 30, 50))
+                        .setEmission(new Color(java.awt.Color.RED).scale(0.5))
+                        .setMaterial(new Material().setkD(0.5).setkS(0.9).setnShininess(100)),
+                new Sphere(4, new Point(35, 30, 75))
+                 .setEmission(new Color(java.awt.Color.ORANGE).scale(0.5))
+                 .setMaterial(new Material().setkD(0.5).setkS(0.9).setnShininess(100)),
+                 new Sphere(4, new Point(35, 30, 100))
+                  .setEmission(new Color(java.awt.Color.GREEN).scale(0.3))
+                  .setMaterial(new Material().setkD(0.5).setkS(0.9).setnShininess(100)));
 
 
-//        scene1.getLights().add(new PointLight(new Color(500, 400, 400)
-//                .add(new Color(500, 400, 400)), new Point(0, 50, 40)).setBeamsNum(0));
-//        scene1.getLights().add(new SpotLight(new Color(500, 400, 400),
-//                new Point(-56, 50, 71), new Vector(0,-1,0)).setkL(4E-5).setkQ(2E-7).setRadius(4).setBeamsNum(0));
-        scene1.getLights().add(new SpotLight(new Color(500, 400, 400),
-                new Point(10, 55, 75), new Vector(1.5,-1,0)).setkL(4E-5).setkQ(2E-7).setRadius(4).setBeamsNum(0));
+        scene1.getLights().add(new PointLight(new Color(java.awt.Color.YELLOW)
+                .add(new Color(java.awt.Color.YELLOW)).scale(0.2), new Point(0, 50, 40)).setBeamsNum(0));
+        scene1.getLights().add(new SpotLight(new Color(java.awt.Color.orange),
+                new Point(-56, 50, 71), new Vector(0,-1,0)).setRadius(4).setBeamsNum(0));
+        scene1.getLights().add(new SpotLight(new Color(java.awt.Color.CYAN),
+                new Point(10, 55, 75), new Vector(1.5,-1,0)).setRadius(4).setBeamsNum(0));
 
 
         ImageWriter imageWriter = new ImageWriter("test project", 1000, 1000);
