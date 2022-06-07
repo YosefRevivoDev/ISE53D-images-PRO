@@ -61,7 +61,7 @@ public class Tube extends Geometry {
         Double t = alignZero(P0_To_P.dotProduct(v));// alignZero means =  if the result is close to zero so result will be zero
         // בדיקה אם הנקודה הנתונה והנקודת ההתחלה נמצאות באותו מקום - כלומר מאונכות אחת לשניה
         if (isZero(t)){ // if we recive 0 so we return tje Normal
-             return P0_To_P.normalize();
+            return P0_To_P.normalize();
         }
 
         Point O = P0.add(v.scale(t));// במידה ולא אז נוסיף לו את הוקטור V ונכפיל אותו בסקלר T פעמים
@@ -151,4 +151,3 @@ public class Tube extends Geometry {
     }
 //        return null;
 }
-

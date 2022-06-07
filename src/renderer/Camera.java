@@ -131,8 +131,8 @@ public class Camera {
             if (rayTracerBase == null) {
                 throw new MissingResourceException("missing resource", RayTracerBase.class.getName(), "");
             }
-        // The nested loop finds and creates a ray for each pixels, finds its color and
-        // writes it to the image pixles
+            // The nested loop finds and creates a ray for each pixels, finds its color and
+            // writes it to the image pixles
             //rendering the image
             int nX = imageWriter.getNx();
             int nY = imageWriter.getNy();
@@ -226,7 +226,7 @@ public class Camera {
         /*for (int j = interval; j < imageWriter.getNy() - 1; j += interval)
             for (int i = 0; i < imageWriter.getNx(); i++)
                 imageWriter.writePixel(j, i, color);*/
-        }
+    }
 
     /**
      * The function calls the image writer to produce the image that given to it

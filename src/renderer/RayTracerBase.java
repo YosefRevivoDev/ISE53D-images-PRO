@@ -1,6 +1,8 @@
 package renderer;
 
+import geometries.Intersectable;
 import primitives.Color;
+import primitives.Point;
 import primitives.Ray;
 import scene.Scene;
 
@@ -24,4 +26,8 @@ public abstract class RayTracerBase {
      * @return Color The color of the points that the ray meets
      */
     public abstract Color traceRay(Ray ray);
+    //public abstract Color calcColor(Intersectable.GeoPoint p, Ray ray, int level, double k);
+    //public abstract Point findClosestIntersection(Ray ray);
+
+
 }

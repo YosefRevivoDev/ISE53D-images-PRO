@@ -28,9 +28,8 @@ public class SpotLight extends PointLight implements LightSource {
      * @param intensity light intensity
      * @param position  Light starts location
      * @param direction direction of the light
-     * @param radius
      */
-    public SpotLight(Color intensity, Point position, Vector direction, double radius) {
+    public SpotLight(Color intensity, Point position, Vector direction) {
         super(intensity, position);
         this.direction = direction.normalize();
         this.radius = radius;

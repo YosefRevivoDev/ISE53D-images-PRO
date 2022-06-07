@@ -81,7 +81,7 @@ public class Polygon extends Geometry {
 			if (positive != (edge1.crossProduct(edge2).dotProduct(n) > 0))
 				throw new IllegalArgumentException("All vertices must be ordered and the polygon must be convex");
 		}
-		size = vertices.length;
+		//size = vertices.length;
 	}
 
 	/**
@@ -91,19 +91,14 @@ public class Polygon extends Geometry {
 	 */
 	@Override
 	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
-		/*List<Point> intersection = plane.findIntsersections(ray);
+		List<GeoPoint> intersection = plane.findGeoIntersections(ray);
 		if (intersection == null) return null;
-
 		Point p0 = ray.getPoint();
 		Vector v = ray.getDir();
-
 		Vector v1 = vertices.get(1).subtract(p0).normalize();
 		Vector v2 = vertices.get(0).subtract(p0).normalize();
-
 		double sign = v.dotProduct(v1.crossProduct(v2));
 		if (isZero(sign)) return null;
-
-
 		boolean positive = sign > 0;
 		for (int i = vertices.size() - 1; i > 0; --i) {
 			v1 = v2;
@@ -112,9 +107,8 @@ public class Polygon extends Geometry {
 			if (isZero(sign)) return null;
 			if (positive != (sign > 0)) return null;
 		}
+		return List.of(new GeoPoint(this,intersection.get(0)._point));
 
-		intersection.get(0). = this;*/
-		return null;
 	}
 
 	/**
