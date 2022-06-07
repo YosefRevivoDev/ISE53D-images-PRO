@@ -340,7 +340,6 @@ public class LightsTests {
                         .setEmission(new Color(java.awt.Color.RED).scale(0.1))
                         .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(100)),
                 new Polygon(new Point(-37,20,84),new Point(-37,21,84), new Point(-75,21,84),new Point(-75,20,84))
-                        .setEmission(new Color(java.awt.Color.RED).scale(0.1))
                         .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(100)),
                 new Polygon(new Point(-75,20,58),new Point(-75,21,58), new Point(-75,21,84),new Point(-75,20,84))
                         .setEmission(new Color(java.awt.Color.RED).scale(0.1))
