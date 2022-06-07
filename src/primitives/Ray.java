@@ -1,12 +1,8 @@
 package primitives;
 
-import geometries.Intersectable;
-import geometries.Intersectable.GeoPoint;
-import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities;
-import renderer.Camera;
+import geometries.Intersect.GeoPoint;
 
 import java.util.List;
-import java.util.Objects;
 
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;

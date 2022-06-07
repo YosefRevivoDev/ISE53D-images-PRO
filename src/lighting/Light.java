@@ -17,6 +17,10 @@ abstract class Light {
         this.intensity = intensity;
     }
 
+    public Light() {
+
+    }
+
     /**
      *
      * @return

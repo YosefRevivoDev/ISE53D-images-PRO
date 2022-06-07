@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SpotLight extends PointLight implements LightSource {
 
-    final Vector direction;
+     Vector direction;
 
 //    /**
 //     *
@@ -33,6 +33,10 @@ public class SpotLight extends PointLight implements LightSource {
         super(intensity, position);
         this.direction = direction.normalize();
         this.radius = radius;
+    }
+
+    public SpotLight(Vector vector, Color color, Point point, int i) {
+        super();
     }
 
     @Override

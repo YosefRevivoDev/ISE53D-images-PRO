@@ -3,7 +3,6 @@ package scene;
 import geometries.Geometries;
 import lighting.*;
 import primitives.Color;
-import geometries.Intersectable;
 
 import java.util.LinkedList;
 import java.util.List;

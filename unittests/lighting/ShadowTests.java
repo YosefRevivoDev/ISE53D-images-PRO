@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import static java.awt.Color.*;
 
 import renderer.ImageWriter;
-import lighting.*;
 import geometries.*;
 import primitives.*;
 import renderer.*;
@@ -17,7 +16,7 @@ import scene.Scene;
  * @author Dan
  */
 public class ShadowTests {
-    private Intersectable sphere = new Sphere(60d, new Point(0, 0, -200)) //
+    private Intersect sphere = new Sphere(60d, new Point(0, 0, -200)) //
             .setEmission(new Color(BLUE)) //
             .setMaterial(new Material().setkD(0.5).setkS(0.5).setnShininess(30));
     private Material trMaterial = new Material().setkD(0.5).setkS(0.5).setnShininess(30);

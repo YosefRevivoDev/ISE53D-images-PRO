@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import lighting.AmbientLight;
 import geometries.*;
 import primitives.*;
-import renderer.*;
 import scene.Scene;
 import static java.awt.Color.*;
 
@@ -58,7 +57,7 @@ public class RenderTests {
                 .setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.2))).build(); //
 
         scene.getGeometries().add( //
-                (Intersectable) new Sphere(50, new Point(0, 0, -100)),
+                (Intersect) new Sphere(50, new Point(0, 0, -100)),
                 // up left
                 new Triangle(new Point(-100, 0, -100), new Point(0, 100, -100), new Point(-100, 100, -100))
                         .setEmission(new Color(GREEN)),
