@@ -368,7 +368,7 @@ public class LightsTests {
         ImageWriter imageWriter = new ImageWriter("test project", 1000, 1000);
         camera3.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene2)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 
@@ -606,7 +606,7 @@ public class LightsTests {
         ImageWriter imageWriter = new ImageWriter("test project2", 1000, 1000);
         camera3.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene1)) //
-                .renderImage(); //
+                .renderImage(true); //
                 camera3.writeToImage();
     }
 }

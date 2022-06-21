@@ -36,7 +36,7 @@ public class ShadowTests {
                 new SpotLight(new Color(400, 240, 0), spotLocation, new Vector(1, 1, -3)) //
                         .setkL(1E-5).setkQ(1.5E-7));
         camera.setImageWriter(new ImageWriter(pictName, 400, 400)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 
@@ -112,7 +112,7 @@ public class ShadowTests {
                         .setkL(4E-4).setkQ(2E-5));
 
         camera.setImageWriter(new ImageWriter("shadowTrianglesSphere", 600, 600)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 

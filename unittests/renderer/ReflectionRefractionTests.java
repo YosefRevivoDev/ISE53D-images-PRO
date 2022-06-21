@@ -45,7 +45,7 @@ public class ReflectionRefractionTests {
 
         camera.setImageWriter(new ImageWriter("refractionTwoSpheres", 500, 500)) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 
@@ -79,7 +79,7 @@ public class ReflectionRefractionTests {
         ImageWriter imageWriter = new ImageWriter("reflectionTwoSpheresMirrored", 500, 500);
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 
@@ -110,7 +110,7 @@ public class ReflectionRefractionTests {
         ImageWriter imageWriter = new ImageWriter("refractionShadow", 600, 600);
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 
@@ -142,7 +142,7 @@ public class ReflectionRefractionTests {
         ImageWriter imageWriter = new ImageWriter("refractionShadow2", 600, 600);
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 
@@ -181,7 +181,7 @@ public class ReflectionRefractionTests {
         ImageWriter imageWriter = new ImageWriter("another test", 600, 600);
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 
@@ -216,7 +216,7 @@ public class ReflectionRefractionTests {
         ImageWriter imageWriter = new ImageWriter("another test 2", 600, 600);
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 
@@ -252,7 +252,7 @@ public class ReflectionRefractionTests {
         ImageWriter imageWriter = new ImageWriter("another test 3", 600, 600);
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 
@@ -284,7 +284,7 @@ public class ReflectionRefractionTests {
         ImageWriter imageWriter = new ImageWriter("SoftShading", 600, 600);
         camera.setImageWriter(imageWriter)
                 .setRayTracerBase(new RayTracerBasic(scene))
-                .renderImage()
+                .renderImage(true)
                 .writeToImage();
     }
 
@@ -309,7 +309,7 @@ public class ReflectionRefractionTests {
         ImageWriter imageWriter = new ImageWriter("SoftShading2", 600, 600);
         camera.setImageWriter(imageWriter)
                 .setRayTracerBase(new RayTracerBasic(scene))
-                .renderImage()
+                .renderImage(true)
                 .writeToImage();
     }
 
@@ -575,7 +575,7 @@ public class ReflectionRefractionTests {
         ImageWriter imageWriter = new ImageWriter("polygonT", 600, 600);
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 
@@ -640,7 +640,7 @@ public class ReflectionRefractionTests {
 
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene))
-                .renderImage()//
+                .renderImage(true)//
                 .writeToImage(); //
     }
     @Test
@@ -667,7 +667,7 @@ public class ReflectionRefractionTests {
         ImageWriter imageWriter = new ImageWriter("refractionShadow3", 600, 600);
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 
@@ -806,7 +806,7 @@ public class ReflectionRefractionTests {
         ImageWriter imageWriter = new ImageWriter("final", 600, 600);
         camera.setImageWriter(imageWriter) //
                 .setRayTracerBase(new RayTracerBasic(scene)) //
-                .renderImage() //
+                .renderImage(true) //
                 .writeToImage();
     }
 }
